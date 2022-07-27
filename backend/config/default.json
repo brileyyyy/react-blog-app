@@ -1,0 +1,4 @@
+{
+  "server-port": 5000,
+  "dbURL": "mongodb+srv://briley:12345@blog-app.tcf0r.mongodb.net/?retryWrites=true&w=majority"
+}
