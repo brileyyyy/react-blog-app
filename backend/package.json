@@ -10,9 +10,12 @@
   "author": "briley <brileyforbusiness@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.0.1",
     "config": "^3.3.7",
     "dayjs": "^1.11.4",
     "express": "^4.18.1",
+    "express-validator": "^6.14.2",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.5.0",
     "pino": "^8.3.0",
     "pino-pretty": "^8.1.0"
