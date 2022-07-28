@@ -1,16 +1,10 @@
 import User from "../models/User.js";
 import bcrypt from 'bcrypt'
-import {validationResult} from 'express-validator'
 import {JWTSign} from "../utils/jwt.utils.js";
 
 class UserController {
     async createUser(req, res) {
         try {
-            const errors = validationResult(req)
-            if (!errors.isEmpty()) {
-                return res.status(400).json(errors.array())
-            }
-
             const {email, password, name} = req.body
 
             const user = await User.findOne({email})

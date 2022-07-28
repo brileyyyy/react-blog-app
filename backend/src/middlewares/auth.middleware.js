@@ -5,7 +5,9 @@ export const authMiddleware = (req, res, next) => {
 
     try {
         const accessToken = req.headers.authorization?.split(' ')[1]
-        if (!accessToken) return next()
+        if (!accessToken) {
+            return res.status(401).json({message: 'Unauthorized'})
+        }
 
         const decoded = JWTVerify(accessToken)
         if (decoded) {

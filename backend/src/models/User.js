@@ -5,7 +5,8 @@ const userModel = new mongoose.Schema(
         email: {type: String, require: true, unique: true},
         password: {type: String, require: true},
         name: {type: String, require: true},
-        avatarURL: String
+        avatarURL: String,
+        posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}]
     },
     {
         timestamps: true

@@ -2,7 +2,7 @@ import config from "config";
 import mongoose from "mongoose";
 import log from "./logger.js";
 
-export const connectToMongo = async () => {
+export async function connectToMongo() {
     const dbURL = config.get('dbURL')
 
     try {
