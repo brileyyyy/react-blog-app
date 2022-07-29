@@ -1,0 +1,24 @@
+.container {
+	@apply relative bg-black h-72 rounded-xl cursor-pointer
+}
+
+.category__image {
+	@apply absolute block h-72 w-full object-cover rounded-xl;
+	transition: .25s ease;
+}
+
+.category__title {
+	@apply absolute pt-2 px-2 font-medium text-neutral-200 opacity-0;
+	transition: .25s ease;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.container:hover .category__image {
+	opacity: 0.4;
+}
+
+.container:hover .category__title {
+	opacity: 1;
+}
