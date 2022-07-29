@@ -7,7 +7,7 @@ const CreateButton = () => {
 
     return (
         <button
-            className='blue__btn'
+            className='blue__btn ml-auto mr-6'
             onClick={() => navigate('/create')}
         >
             <span>Создать пост</span>

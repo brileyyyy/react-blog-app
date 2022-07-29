@@ -21,7 +21,7 @@ const PostList = () => {
         <div className='my-6 bg-white rounded-md'>
             <div className='list__sections'>
                 <span className='mr-6'>Новые</span>
-                <span className='text-neutral-400'>Популярные</span>
+                <span className='text-gray-400'>Популярные</span>
             </div>
             <div className='post__list'>
                 {posts.map(post => <PostItem post={post} key={post.id}/>)}

@@ -13,12 +13,12 @@
 }
 
 .post__statistic {
-	@apply absolute w-full mb-4 bottom-0 px-5 flex justify-between text-neutral-200 opacity-0;
+	@apply absolute w-full mb-4 bottom-0 px-5 flex justify-between text-gray-200 opacity-0;
 	transition: .25s ease;
 }
 
 .post__author {
-	@apply flex items-center text-sm text-neutral-400
+	@apply flex items-center text-sm text-gray-400
 }
 
 .container:hover .post__image {

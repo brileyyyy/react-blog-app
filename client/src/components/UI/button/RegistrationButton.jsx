@@ -6,7 +6,7 @@ const RegistrationButton = () => {
 
     return (
         <button
-            className='green_btn'
+            className='green__btn'
             onClick={() => navigate('/register')}
         >
             Регистрация

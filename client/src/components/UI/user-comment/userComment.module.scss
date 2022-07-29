@@ -1,0 +1,19 @@
+.comment__profile {
+	@apply mb-2 flex items-center
+}
+
+.comment__avatar {
+	@apply mr-2 w-12 h-12 object-cover rounded-full
+}
+
+.comment__name {
+	@apply text-l font-medium
+}
+
+.comment__date {
+	@apply text-sm text-gray-400
+}
+
+.comment__body {
+	@apply text-sm text-gray-400
+}

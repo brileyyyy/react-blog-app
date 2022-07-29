@@ -1,0 +1,11 @@
+.container {
+	@apply mb-4 p-4 bg-white rounded-md
+}
+
+.tags__list {
+	@apply mt-3 text-gray-500 text-l
+}
+
+.tags__item {
+	@apply py-1 grid grid-menubar-item items-center rounded-md
+}

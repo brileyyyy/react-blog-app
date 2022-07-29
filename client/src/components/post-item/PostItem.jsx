@@ -1,8 +1,8 @@
 import React from 'react';
 import PostStatistic from "../UI/post-statistic/PostStatistic";
-import {MdClose, MdDeleteOutline, MdOutlineModeEdit} from "react-icons/md";
-import './postItem.scss'
+import {MdOutlineModeEdit} from "react-icons/md";
 import {IoCloseSharp} from "react-icons/io5";
+import './postItem.scss'
 
 const PostItem = ({post}) => {
     return (

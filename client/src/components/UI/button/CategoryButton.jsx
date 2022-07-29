@@ -7,7 +7,7 @@ const CategoryButton = () => {
 
     return (
         <button
-            className='green_btn'
+            className='green__btn'
             onClick={() => navigate('/categories')}
         >
             <BiCategoryAlt size={20} className='mr-2'/>

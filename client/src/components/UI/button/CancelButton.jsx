@@ -1,17 +1,17 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
 
-const LoginButton = () => {
+const CancelButton = () => {
     const navigate = useNavigate()
 
     return (
         <button
-            className='blue__btn mr-4'
-            onClick={() => navigate('/login')}
+            className='cancel__btn'
+            onClick={() => navigate('/')}
         >
-            Вход
+            <span>Отмена</span>
         </button>
     );
 };
 
-export default LoginButton;
+export default CancelButton;

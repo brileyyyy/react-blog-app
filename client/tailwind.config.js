@@ -28,6 +28,9 @@ module.exports = {
                 },
                 '.bg-white-transparent': {
                     backgroundColor: 'rgba(255, 255, 255, 0.6)'
+                },
+                '.min-h-300': {
+                    minHeight: '300px'
                 }
             })
         })

@@ -36,7 +36,7 @@ const MenuBar = () => {
                 </div>
                 <hr className='my-1.5'/>
                 <div className={styles.nav__item}>
-                    <MdLanguage size={20} className='text-neutral-400'/>
+                    <MdLanguage size={20} className='text-gray-400'/>
                     <span>Язык</span>
                 </div>
             </div>
