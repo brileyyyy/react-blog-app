@@ -1,0 +1,11 @@
+.container {
+	@apply mb-4 p-4 bg-white rounded-b-md
+}
+
+.nav__list {
+	@apply mt-3 text-neutral-500 text-l
+}
+
+.nav__item {
+	@apply py-2 grid grid-menubar-item items-center rounded-md cursor-pointer hover:bg-neutral-50
+}
