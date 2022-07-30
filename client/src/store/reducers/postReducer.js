@@ -30,6 +30,22 @@ export const getAllPosts = createAsyncThunk(
     }
 )
 
+export const deletePost = createAsyncThunk(
+    'post/delete', async (post, {rejectWithValue}) => {
+        try {
+            const response = await axios.delete(`http://localhost:5000/api/posts/${post._id}`, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+
+            return response.data
+        } catch (e) {
+            return rejectWithValue(e.response.data.message)
+        }
+    }
+)
+
 const initialState = {
     posts: [],
     isLoading: false
@@ -54,6 +70,9 @@ const postReducer = createSlice({
             })
             .addCase(getAllPosts.pending, (state) => {
                 state.isLoading = true
+            })
+            .addCase(deletePost.fulfilled, (state, action) => {
+                state.posts = state.posts.filter(post => post._id !== action.payload._id)
             })
     }
 })

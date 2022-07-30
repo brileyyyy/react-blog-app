@@ -8,7 +8,7 @@ const CategoryItem = ({post}) => {
                 <img
                     className='category__image'
                     src="https://proprikol.ru/wp-content/uploads/2020/06/kartinki-zavtrak-35.jpg"
-                    alt="photo"
+                    alt="category background"
                 />
                 <div className='category__title'>
                     {post.title}

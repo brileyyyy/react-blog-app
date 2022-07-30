@@ -77,7 +77,7 @@ class PostController {
                         return res.status(404).json({message: 'Post in not found'})
                     }
 
-                    return res.json({message: 'Post was deleted'})
+                    return res.json(doc)
                 }
             )
         } catch (e) {

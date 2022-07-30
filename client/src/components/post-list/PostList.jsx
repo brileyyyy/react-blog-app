@@ -10,7 +10,7 @@ const PostList = () => {
 
     useEffect(() => {
         dispatch(getAllPosts())
-    }, [])
+    }, [dispatch])
 
     return (
         <div className='my-6 bg-white rounded-md'>
