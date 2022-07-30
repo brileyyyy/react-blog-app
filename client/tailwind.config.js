@@ -12,7 +12,6 @@ module.exports = {
                     padding: '8px 16px',
                     display: 'flex',
                     alignItems: 'center',
-                    color: '#fff',
                     borderRadius: '6px'
                 }
             })
@@ -31,9 +30,6 @@ module.exports = {
                 },
                 '.min-h-300': {
                     minHeight: '300px'
-                },
-                '.yellow': {
-                    backgroundColor: '#ffdc00'
                 }
             })
         })

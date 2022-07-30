@@ -1,0 +1,23 @@
+.navbar__wrapper {
+	@apply py-5 px-6 flex justify-between items-center border-b
+}
+
+.logout__btn {
+	@apply flex items-center text-sm text-gray-400 font-medium cursor-pointer
+}
+
+.avatar {
+	@apply w-8 h-8 object-cover rounded-full cursor-pointer
+}
+
+.auth__btns {
+	@apply flex items-center text-sm font-medium
+}
+
+.login__btn {
+	@apply btn-primary bg-yellow-300 ml-auto
+}
+
+.register__btn {
+	@apply btn-primary bg-yellow-300 ml-auto
+}

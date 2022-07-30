@@ -1,15 +1,19 @@
 import React from 'react';
+import {useNavigate} from "react-router-dom";
+import {useDispatch, useSelector} from "react-redux";
+import Button from "../button/Button";
+import {logout} from "../../../store/reducers/userReducer";
+import {FiLogOut} from "react-icons/fi";
 import {BsFillSunFill} from "react-icons/bs";
-import LoginButton from "../button/LoginButton";
-import RegistrationButton from "../button/RegistrationButton";
-import {useSelector} from "react-redux";
-import LoguotButton from "../button/LoguotButton";
+import './navbar.scss'
 
 const Navbar = () => {
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
     const {isAuth} = useSelector(state => state.user)
 
     return (
-        <div className='py-4 px-6 flex justify-between items-center border-b'>
+        <div className='navbar__wrapper'>
             {window.location.pathname === '/'
                 ? <span className='text-2xl font-bold'>Новые статьи</span>
                 : <span className='text-2xl font-bold'>Популярные категории</span>
@@ -17,18 +21,21 @@ const Navbar = () => {
             {isAuth
                 ?
                 <div className='flex items-center'>
-                    <LoguotButton/>
+                    <div className='logout__btn' onClick={() => dispatch(logout())}>
+                        <FiLogOut size={16} className='mr-2'/>
+                        Выйти
+                    </div>
                     <BsFillSunFill size={20} className='mx-6 cursor-pointer'/>
-                    <img
-                        className='w-8 h-8 object-cover rounded-full cursor-pointer'
-                        src='images/briley.jpg'
-                        alt='user-avatar'
-                    />
+                    <img className='avatar' src='images/briley.jpg' alt='user-avatar'/>
                 </div>
                 :
-                <div className='flex items-center text-sm font-medium'>
-                    <LoginButton/>
-                    <RegistrationButton/>
+                <div className='auth__btns'>
+                    <Button className='login__btn' onClick={() => navigate('/login')}>
+                        Войти
+                    </Button>
+                    <Button className='register__btn' onClick={() => navigate('/register')}>
+                        Зарегестрироваться
+                    </Button>
                 </div>
             }
         </div>
