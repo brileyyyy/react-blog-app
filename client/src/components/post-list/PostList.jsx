@@ -1,21 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PostItem from "../post-item/PostItem";
+import {useDispatch, useSelector} from "react-redux";
+import {getAllPosts} from "../../store/reducers/postReducer";
 import './postList.scss'
 
 const PostList = () => {
-    const posts = [
-        {id: 1, title: 'React JS new features'},
-        {id: 2, title: 'React JS new features'},
-        {id: 3, title: 'React JS new features'},
-        {id: 4, title: 'React JS new features'},
-        {id: 5, title: 'React JS new features'},
-        {id: 6, title: 'React JS new features'},
-        {id: 7, title: 'React JS new features'},
-        {id: 8, title: 'React JS new features'},
-        {id: 9, title: 'React JS new features'},
-        {id: 10, title: 'React JS new features'},
-        {id: 11, title: 'React JS new features'},
-    ]
+    const dispatch = useDispatch()
+    const {posts, isLoading} = useSelector(state => state.post)
+
+    useEffect(() => {
+        dispatch(getAllPosts())
+    }, [])
 
     return (
         <div className='my-6 bg-white rounded-md'>
@@ -23,11 +18,22 @@ const PostList = () => {
                 <span className='mr-6'>Новые</span>
                 <span className='text-gray-400'>Популярные</span>
             </div>
-            <div className='post__list'>
-                {posts.map(post => <PostItem post={post} key={post.id}/>)}
-            </div>
+            {!isLoading && !posts.length &&
+                <div className='no__post'>
+                    Постов пока нет
+                </div>
+            }
+            {isLoading
+                ?
+                <div className='post__loading'>
+                    Загрузка...
+                </div>
+                :
+                <div className='post__list'>
+                    {posts.map(post => <PostItem post={post} key={post._id}/>)}
+                </div>
+            }
         </div>
-
     );
 };
 

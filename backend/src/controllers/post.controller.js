@@ -11,7 +11,7 @@ class PostController {
 
             const post = await Post.findOne({title, description, tags, imageUrl})
             if (post) {
-                return res.status(400).json({message: 'This post is already exists'})
+                return res.status(400).json({message: 'This post already exists'})
             }
 
             const newPost = await Post.create({title, description, tags, user: userId, imageUrl})

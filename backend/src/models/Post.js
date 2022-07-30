@@ -4,7 +4,7 @@ const postModel = new mongoose.Schema(
     {
         title: {type: String, require: true},
         description: String,
-        tags: {type: Array, default: []},
+        tags: {type: [String], default: []},
         viewsCount: {type: Number, default: 0},
         user: {type: mongoose.Schema.Types.ObjectId, require: true, ref: 'User'},
         imageUrl: {type: String, default: ''}

@@ -17,6 +17,7 @@ const CreatePostPage = () => {
     const navigate = useNavigate()
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
+    const [tags, setTags] = useState('')
 
     function createPostHandler(data) {
         navigate('/')
@@ -76,11 +77,17 @@ const CreatePostPage = () => {
                     placeholder="Введите текст..."
                     onChange={(e) => setDescription(e.target.value)}
                 />
-                <input className='post__tags' type='text' placeholder='Тэги'/>
+                <input
+                    className='post__tags'
+                    type='text'
+                    value={tags}
+                    placeholder='Тэги'
+                    onChange={(e) => setTags(e.target.value)}
+                />
                 <div className='flex items-center'>
                     <Button
                         className='post__btn'
-                        onClick={() => createPostHandler({title, description})}
+                        onClick={() => createPostHandler({title, description, tags: tags.split(' ')})}
                     >
                         Опубликовать
                     </Button>

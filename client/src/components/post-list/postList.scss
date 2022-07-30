@@ -5,3 +5,11 @@
 .post__list {
 	@apply px-6 py-8 grid grid-cols-3 gap-x-4 gap-y-7
 }
+
+.no__post {
+	@apply py-8 text-l text-center text-gray-400 font-medium
+}
+
+.post__loading {
+	@apply py-8 text-l text-gray-400 text-center font-medium
+}
