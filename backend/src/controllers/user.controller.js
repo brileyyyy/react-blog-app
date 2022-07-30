@@ -1,6 +1,9 @@
 import User from "../models/User.js";
 import bcrypt from 'bcrypt'
 import {JWTSign} from "../utils/jwt.utils.js";
+import UserService from "../services/user.service.js";
+import lodash from 'lodash'
+const {omit} = lodash
 
 class UserController {
     async createUser(req, res) {
@@ -9,7 +12,7 @@ class UserController {
 
             const user = await User.findOne({email})
             if (user) {
-                return res.status(400).json({message: `User with email ${email} already exists`})
+                return res.status(400).json({message: `User with this email already exists`})
             }
 
             const hashPassword = bcrypt.hashSync(password, 8)
@@ -24,16 +27,9 @@ class UserController {
 
     async createSession(req, res) {
         try {
-            const {email, password} = req.body
-
-            const user = await User.findOne({email})
+            const user = await UserService.comparePassword(req.body)
             if (!user) {
-                return res.status(404).json({message: 'User not found'})
-            }
-
-            const isValidPassword = await bcrypt.compare(password, user.password)
-            if (!isValidPassword) {
-                return res.status(401).json({message: 'Invalid email or password'})
+                return res.status(400).json({message: 'Invalid email or password'})
             }
 
             const token = JWTSign({_id: user._id}, {expiresIn: '1hr'})
@@ -50,7 +46,7 @@ class UserController {
 
     async getAuth(req, res) {
         try {
-            const userId = res.locals.user?._id
+            const userId = res.locals.user._id
 
             const user = await User.findOne({_id: userId})
             if (!user) {
@@ -61,7 +57,7 @@ class UserController {
 
             return res.json({
                 token,
-                user
+                user: omit(user.toJSON(), 'password')
             })
         } catch (e) {
             console.log(e)
