@@ -9,7 +9,7 @@ const RegistrationButton = () => {
             className='green__btn'
             onClick={() => navigate('/register')}
         >
-            Регистрация
+            Зарегестрироваться
         </button>
     );
 };

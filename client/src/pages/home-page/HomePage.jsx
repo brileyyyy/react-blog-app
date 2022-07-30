@@ -4,12 +4,13 @@ import Navbar from "../../components/UI/navbar/Navbar";
 import LeftSideMenu from "../../components/leftside-menu/LeftsideMenu";
 import CreateButton from "../../components/UI/button/CreateButton";
 import CategoryButton from "../../components/UI/button/CategoryButton";
+import {useSelector} from "react-redux";
 
 const HomePage = () => {
-    const isAuth = true
+    const {isAuth} = useSelector(state => state.user)
 
     return (
-        <div className='grid grid-primary gap-6'>
+        <div className='mx-auto max-w-7xl grid grid-primary gap-6'>
             <LeftSideMenu/>
             <div>
                 <Navbar/>

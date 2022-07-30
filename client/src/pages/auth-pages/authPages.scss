@@ -1,0 +1,19 @@
+.auth__form {
+	@apply w-full bg-white px-20 flex flex-col
+}
+
+.auth__title {
+	@apply mt-56 mb-6 text-3xl font-bold text-center
+}
+
+.auth__input {
+	@apply my-1 px-4 p-2 border rounded-md outline-none
+}
+
+.auth__error {
+	@apply px-4 text-sm text-red-600
+}
+
+.auth__btn {
+	@apply mt-6 btn-primary text-black yellow justify-center
+}

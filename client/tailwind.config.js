@@ -31,6 +31,9 @@ module.exports = {
                 },
                 '.min-h-300': {
                     minHeight: '300px'
+                },
+                '.yellow': {
+                    backgroundColor: '#ffdc00'
                 }
             })
         })

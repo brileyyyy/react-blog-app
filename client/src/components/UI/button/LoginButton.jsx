@@ -9,7 +9,7 @@ const LoginButton = () => {
             className='blue__btn mr-4'
             onClick={() => navigate('/login')}
         >
-            Вход
+            Войти
         </button>
     );
 };

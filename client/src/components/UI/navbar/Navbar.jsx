@@ -2,9 +2,11 @@ import React from 'react';
 import {BsFillSunFill} from "react-icons/bs";
 import LoginButton from "../button/LoginButton";
 import RegistrationButton from "../button/RegistrationButton";
+import {useSelector} from "react-redux";
+import LoguotButton from "../button/LoguotButton";
 
 const Navbar = () => {
-    const isAuth = true
+    const {isAuth} = useSelector(state => state.user)
 
     return (
         <div className='py-4 px-6 flex justify-between items-center border-b'>
@@ -15,7 +17,8 @@ const Navbar = () => {
             {isAuth
                 ?
                 <div className='flex items-center'>
-                    <BsFillSunFill size={20} className='mr-6 cursor-pointer'/>
+                    <LoguotButton/>
+                    <BsFillSunFill size={20} className='mx-6 cursor-pointer'/>
                     <img
                         className='w-8 h-8 object-cover rounded-full cursor-pointer'
                         src='images/briley.jpg'
