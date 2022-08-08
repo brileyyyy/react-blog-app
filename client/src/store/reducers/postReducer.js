@@ -33,9 +33,9 @@ export const getAllPosts = createAsyncThunk(
 export const getOnePost = createAsyncThunk(
     'post/getOne', async (data, {rejectWithValue}) => {
         try {
-            const {post, navigate} = data
+            const {post, navigate, edit} = data
             const response = await axios.get(`http://localhost:5000/api/posts/${post._id}`)
-            navigate(`/posts/${post._id}`)
+            edit ? navigate(`/posts/${post._id}/edit`) : navigate(`/posts/${post._id}`)
 
             return response.data
         } catch (e) {

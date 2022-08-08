@@ -95,8 +95,9 @@ class PostController {
                 {_id: postId},
                 {...data}
             )
+            const post = await Post.findOne({_id: postId})
 
-            return res.json({message: 'Post was updated'})
+            return res.json(post)
         } catch (e) {
             console.log(e)
             return res.status(500).json({message: 'Update post error'})

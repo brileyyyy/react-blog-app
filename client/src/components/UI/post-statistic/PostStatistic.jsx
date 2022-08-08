@@ -4,7 +4,7 @@ import {BiComment} from "react-icons/bi";
 import {GoEye} from "react-icons/go";
 import '../../post-item/postItem.scss'
 
-const PostStatistic = () => {
+const PostStatistic = ({post}) => {
     return (
         <div className='post__statistic'>
             <div className='flex items-center'>
@@ -19,7 +19,7 @@ const PostStatistic = () => {
             </div>
             <div className='flex items-center'>
                 <GoEye size={20} className='mr-2'/>
-                <span className='text-lg'>0</span>
+                <span className='text-lg'>{post.viewsCount}</span>
             </div>
         </div>
     );
