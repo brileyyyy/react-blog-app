@@ -6,7 +6,8 @@ const userModel = new mongoose.Schema(
         password: {type: String, require: true},
         name: {type: String, require: true},
         avatarURL: {type: String, default: ''},
-        posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}]
+        posts: [{type: mongoose.Schema.Types.ObjectId, ref: 'Post'}],
+        comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
     },
     {
         timestamps: true

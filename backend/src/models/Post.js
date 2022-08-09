@@ -7,7 +7,8 @@ const postModel = new mongoose.Schema(
         tags: {type: [String], default: []},
         viewsCount: {type: Number, default: 0},
         user: {type: mongoose.Schema.Types.ObjectId, require: true, ref: 'User'},
-        imageUrl: {type: String, default: ''}
+        imageUrl: {type: String, default: ''},
+        comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}]
     },
     {
         timestamps: true
