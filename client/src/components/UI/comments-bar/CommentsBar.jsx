@@ -7,9 +7,9 @@ const CommentsBar = () => {
             <span className='font-bold'>
                 Комментарии
             </span>
-            <UserComment/>
-            <UserComment/>
-            <UserComment/>
+            {/*<UserComment/>*/}
+            {/*<UserComment/>*/}
+            {/*<UserComment/>*/}
         </div>
     );
 };
