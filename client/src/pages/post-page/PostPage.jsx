@@ -1,22 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import Button from "../../components/UI/button/Button";
-import {addComment, getAllComments} from "../../store/reducers/commentReducer";
+import {addComment, getPostComments} from "../../store/reducers/commentReducer";
 import UserComment from "../../components/UI/user-comment/UserComment";
 
 const PostPage = () => {
     const dispatch = useDispatch()
     const {currentPost} = useSelector(state => state.post)
     const {currentUser} = useSelector(state => state.user)
-    const {comments} = useSelector(state => state.comment)
+    const {postComments} = useSelector(state => state.comment)
     const [text, setText] = useState('')
 
     useEffect(() => {
-        dispatch(getAllComments())
-    })
+        dispatch(getPostComments(currentPost))
+    }, [dispatch])
 
     function addCommentHandler() {
-        dispatch(addComment({avatar: '', text}))
+        dispatch(addComment({currentPost, avatar: '', text}))
         setText('')
     }
 
@@ -44,7 +44,6 @@ const PostPage = () => {
                     </div>
                 </div>
             </div>
-
             <div className='h-auto mt-4 bg-white rounded-md'>
                 <div className='flex flex-col p-6'>
                     <div className='mb-6 text-3xl text-gray-700 font-bold'>
@@ -57,25 +56,28 @@ const PostPage = () => {
                             value={text}
                             placeholder='Comment..'
                             onChange={e => setText(e.target.value)}
-
                         />
                         <Button
                             className='btn-primary ml-4 bg-yellow-300'
                             onClick={() => addCommentHandler()}
                         >
-                            Отправить
+                            Send
                         </Button>
                     </div>
                 </div>
             </div>
 
-            <div className='h-auto mt-4 px-6 py-10 bg-white rounded-md'>
-                {comments.map(comment =>
-                    <UserComment comment={comment} user={currentUser} key={comment._id}/>
-                )}
-            </div>
+            {postComments.length
+                ?
+                <div className='h-auto mt-4 py-2 bg-white rounded-md'>
+                    {postComments.map((comment, ind) =>
+                        <UserComment comment={comment} user={currentUser} key={ind}/>
+                    )}
+                </div>
+                :
+                ''
+            }
         </div>
-
     );
 };
 
