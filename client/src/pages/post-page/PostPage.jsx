@@ -46,8 +46,8 @@ const PostPage = () => {
             </div>
             <div className='h-auto mt-4 bg-white rounded-md'>
                 <div className='flex flex-col p-6'>
-                    <div className='mb-6 text-3xl text-gray-700 font-bold'>
-                        Comments
+                    <div className='mb-6 text-2xl text-gray-700 font-bold'>
+                        Комментарии
                     </div>
                     <div className='flex items-center'>
                         <input
@@ -61,7 +61,7 @@ const PostPage = () => {
                             className='btn-primary ml-4 bg-yellow-300'
                             onClick={() => addCommentHandler()}
                         >
-                            Send
+                            Отправить
                         </Button>
                     </div>
                 </div>

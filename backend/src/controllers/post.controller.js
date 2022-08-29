@@ -39,7 +39,7 @@ class PostController {
 
     async getOnePost(req, res) {
         try {
-            const postId = req.params.id
+            const postId = req.params.postId
             Post.findOneAndUpdate(
                 {_id: postId},
                 {$inc: {viewsCount: 1}},
@@ -65,7 +65,13 @@ class PostController {
 
     async deletePost(req, res) {
         try {
-            const postId = req.params.id
+            const postId = req.params.postId
+
+            await User.updateOne(
+                {posts: postId},
+                {$pull: {posts: postId}}
+            )
+
             Post.findOneAndDelete(
                 {_id: postId},
                 (err, doc) => {
@@ -88,7 +94,7 @@ class PostController {
 
     async updatePost(req, res) {
         try {
-            const postId = req.params.id
+            const postId = req.params.postId
             const data = req.body
 
             await Post.updateOne(

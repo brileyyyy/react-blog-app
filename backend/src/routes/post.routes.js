@@ -11,11 +11,11 @@ const postRoutes = (app) => {
         PostController.createPost)
 
     app.get('/api/posts', PostController.getAllPosts)
-    app.get('/api/posts/:id', PostController.getOnePost)
+    app.get('/api/posts/:postId', PostController.getOnePost)
 
-    app.delete('/api/posts/:id', authMiddleware, PostController.deletePost)
+    app.delete('/api/posts/:postId', authMiddleware, PostController.deletePost)
 
-    app.patch('/api/posts/:id',
+    app.patch('/api/posts/:postId',
         authMiddleware,
         postValidation,
         validationMiddleware,

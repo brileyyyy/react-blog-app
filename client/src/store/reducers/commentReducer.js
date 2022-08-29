@@ -62,6 +62,27 @@ export const deleteComment = createAsyncThunk(
     }
 )
 
+export const updateComment = createAsyncThunk(
+    'comment/update', async (data, {rejectWithValue}) => {
+        try {
+            const {comment, newText} = data
+
+            const response
+                = await axios.patch(`http://localhost:5000/api/comment/${comment._id}`, {
+                newText
+            }, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+
+            return response.data
+        } catch (e) {
+            return rejectWithValue(e.data.response.message)
+        }
+    }
+)
+
 const initialState = {
     comments: [],
     postComments: [],
@@ -86,6 +107,11 @@ const commentSlice = createSlice({
             .addCase(deleteComment.fulfilled, (state, action) => {
                 state.postComments =
                     state.postComments.filter(post => post._id !== action.payload._id)
+            })
+            .addCase(updateComment.fulfilled, (state, action) => {
+                const comment =
+                    state.postComments.find(comment => comment._id === action.payload._id)
+                comment.text = action.payload.text
             })
 })
 

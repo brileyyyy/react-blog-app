@@ -51,6 +51,16 @@ class CommentController {
         try {
             const commentId = req.params.commentId
 
+            await Post.updateOne(
+                {comments: commentId},
+                {$pull: {comments: commentId}}
+            )
+
+            await User.updateOne(
+                {comments: commentId},
+                {$pull: {comments: commentId}}
+            )
+
             Comment.findOneAndDelete(
                 {_id: commentId},
                 (err, doc) => {
@@ -68,6 +78,24 @@ class CommentController {
         } catch (e) {
             console.log(e)
             return res.status(500).json({message: 'Delete comment error'})
+        }
+    }
+
+    async updateComment(req, res) {
+        try {
+            const commentId = req.params.commentId
+            const {newText} = req.body
+
+            await Comment.updateOne(
+                {_id: commentId},
+                {$set: {text: newText}}
+            )
+            const comment = await Comment.findOne({_id: commentId})
+
+            return res.json(comment)
+        } catch (e) {
+            console.log(e)
+            return res.status(500).json({message: 'Update comment error'})
         }
     }
 }
