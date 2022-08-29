@@ -4,7 +4,7 @@ import User from "../models/User.js";
 class PostController {
     async createPost(req, res) {
         try {
-            const {title, description, tags, imageUrl} = req.body
+            const {author, title, description, tags, imageUrl} = req.body
             const userId = res.locals.user._id
 
             const user = await User.findOne({_id: userId})
@@ -14,7 +14,7 @@ class PostController {
                 return res.status(400).json({message: 'This post already exists'})
             }
 
-            const newPost = await Post.create({title, description, tags, user: userId, imageUrl})
+            const newPost = await Post.create({title, description, tags, author, user: userId, imageUrl})
             user.posts.push(newPost._id)
 
             await user.save()

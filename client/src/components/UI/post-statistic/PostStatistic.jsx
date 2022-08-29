@@ -14,7 +14,7 @@ const PostStatistic = ({post}) => {
                 </div>
                 <div className='flex items-center'>
                     <BiComment size={20} className='mr-2'/>
-                    <span className='text-lg'>0</span>
+                    <span className='text-lg'>{post.commentsCount}</span>
                 </div>
             </div>
             <div className='flex items-center'>

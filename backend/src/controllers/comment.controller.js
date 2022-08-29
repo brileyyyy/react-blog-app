@@ -5,12 +5,18 @@ import Post from "../models/Post.js";
 class CommentController {
     async addComment(req, res) {
         try {
-            const {postId, avatar, date, text} = req.body
+            const {author, postId, avatar, date, text} = req.body
             const userId = res.locals.user._id
 
             const user = await User.findOne({_id: userId})
             const post = await Post.findOne({_id: postId})
-            const newComment = await Comment.create({avatar, text, date, user: userId, post: postId})
+            await Post.updateOne(
+                {_id: postId},
+                {$inc: {commentsCount: 1}}
+            )
+
+            const newComment
+                = await Comment.create({avatar, text, date, author, user: userId, post: postId})
 
             user.comments.push(newComment._id)
             post.comments.push(newComment._id)
@@ -27,7 +33,7 @@ class CommentController {
 
     async getPostComments(req, res) {
         try {
-            const comments = await Comment.find({post: req.params.postId})
+            const comments = await Comment.find({post: req.params.postId}).populate('user').exec()
 
             return res.json(comments)
         } catch (e) {
@@ -53,7 +59,7 @@ class CommentController {
 
             await Post.updateOne(
                 {comments: commentId},
-                {$pull: {comments: commentId}}
+                {$pull: {comments: commentId}, $inc: {commentsCount: -1}}
             )
 
             await User.updateOne(

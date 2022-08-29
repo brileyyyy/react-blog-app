@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {TbLetterB, TbLetterH} from "react-icons/tb";
 import {AiOutlineItalic, AiOutlineLine} from "react-icons/ai";
 import {FaListOl, FaListUl, FaQuoteLeft} from "react-icons/fa";
@@ -15,13 +15,16 @@ import './createPostPage.scss'
 const CreatePostPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const {currentUser} = useSelector(state => state.user)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [tags, setTags] = useState('')
 
-    function createPostHandler(data) {
+    function createPostHandler() {
         navigate('/')
-        dispatch(createPost(data))
+        dispatch(createPost(
+            {author: currentUser.name, title, description, tags: tags.split(' ')}
+        ))
     }
 
     return (
@@ -87,7 +90,7 @@ const CreatePostPage = () => {
                 <div className='flex items-center'>
                     <Button
                         className='post__btn'
-                        onClick={() => createPostHandler({title, description, tags: tags.split(' ')})}
+                        onClick={() => createPostHandler()}
                     >
                         Опубликовать
                     </Button>

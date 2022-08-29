@@ -3,14 +3,13 @@ import {useNavigate} from "react-router-dom";
 import PostStatistic from "../UI/post-statistic/PostStatistic";
 import {MdOutlineModeEdit} from "react-icons/md";
 import {IoCloseSharp} from "react-icons/io5";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {deletePost, getOnePost} from "../../store/reducers/postReducer";
 import './postItem.scss'
 
 const PostItem = ({post}) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const {currentUser} = useSelector(state => state.user)
 
     return (
         <div>
@@ -39,7 +38,7 @@ const PostItem = ({post}) => {
                     {post.title}
                 </div>
                 <div className='post__author'>
-                    <div>{currentUser.name}</div>
+                    <div>{post.author}</div>
                     <span className='px-2'>&bull;</span>
                     <div>{(post.createdAt).slice(0, 10)}</div>
                 </div>

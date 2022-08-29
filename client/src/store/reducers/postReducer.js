@@ -4,9 +4,9 @@ import axios from "axios";
 export const createPost = createAsyncThunk(
     'post/create', async (data, {rejectWithValue}) => {
         try {
-            const {title, description, tags} = data
+            const {author, title, description, tags} = data
             const response = await axios.post('http://localhost:5000/api/posts', {
-                title, description, tags
+                author, title, description, tags
             }, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('token')}`

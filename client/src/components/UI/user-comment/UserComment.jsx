@@ -6,7 +6,7 @@ import {BsCheck2} from "react-icons/bs";
 import {deleteComment, updateComment} from "../../../store/reducers/commentReducer";
 import styles from './userComment.module.scss'
 
-const UserComment = ({comment, user}) => {
+const UserComment = ({comment}) => {
     const dispatch = useDispatch()
     const [edit, setEdit] = useState(false)
     const [newText, setNewText] = useState(comment.text)
@@ -23,7 +23,7 @@ const UserComment = ({comment, user}) => {
                     <div className={styles.comment__profile}>
                         <img className={styles.comment__avatar} src='../images/briley.jpg' alt='avatar'/>
                         <div>
-                            <div className={styles.comment__name}>{user.name}</div>
+                            <div className={styles.comment__name}>{comment.author}</div>
                             <div className={styles.comment__date}>{(comment.date).slice(0,10)}</div>
                         </div>
                     </div>

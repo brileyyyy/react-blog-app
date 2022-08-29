@@ -16,7 +16,7 @@ const PostPage = () => {
     }, [dispatch])
 
     function addCommentHandler() {
-        dispatch(addComment({currentPost, avatar: '', text}))
+        dispatch(addComment({author: currentUser.name, currentPost, avatar: '', text}))
         setText('')
     }
 
@@ -71,7 +71,7 @@ const PostPage = () => {
                 ?
                 <div className='h-auto mt-4 py-2 bg-white rounded-md'>
                     {postComments.map((comment, ind) =>
-                        <UserComment comment={comment} user={currentUser} key={ind}/>
+                        <UserComment comment={comment} key={ind}/>
                     )}
                 </div>
                 :
