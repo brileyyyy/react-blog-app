@@ -21,7 +21,7 @@ const MenuBar = () => {
                     <RiFileList2Line size={20}/>
                     <span>Посты</span>
                 </div>
-                <div className={styles.nav__item}>
+                <div className={styles.nav__item} onClick={() => navigate('/liked')}>
                     <AiOutlineHeart size={20}/>
                     <span>Избранное</span>
                 </div>

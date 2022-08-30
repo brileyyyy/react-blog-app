@@ -1,12 +1,10 @@
 import React from 'react';
 import {useNavigate} from "react-router-dom";
 import PostStatistic from "../UI/post-statistic/PostStatistic";
-import PostEdits from "../UI/post-edits/PostEdits";
 import {useDispatch} from "react-redux";
 import {getOnePost} from "../../store/reducers/postReducer";
-import './postItem.scss'
 
-const PostItem = ({post}) => {
+const LikedPostItem = ({post}) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -19,7 +17,6 @@ const PostItem = ({post}) => {
                     alt="post background"
                     onClick={() => dispatch(getOnePost({post, navigate, edit: false}))}
                 />
-                <PostEdits post={post} navigate={navigate}/>
                 <PostStatistic post={post}/>
             </div>
             <div className='pt-2 px-2'>
@@ -36,4 +33,4 @@ const PostItem = ({post}) => {
     );
 };
 
-export default PostItem;
+export default LikedPostItem;

@@ -6,6 +6,7 @@ import authRoutes from "./routes/auth.routes.js";
 import postRoutes from "./routes/post.routes.js";
 import uploadRoutes from "./routes/upload.routes.js";
 import commentRoutes from "./routes/comment.routes.js";
+import likedPostRoutes from "./routes/likedPost.routes.js";
 import {cors} from "./middlewares/cors.middleware.js";
 
 const app = express()
@@ -26,6 +27,7 @@ const start = async () => {
     postRoutes(app)
     uploadRoutes(app)
     commentRoutes(app)
+    likedPostRoutes(app)
 }
 
 start()

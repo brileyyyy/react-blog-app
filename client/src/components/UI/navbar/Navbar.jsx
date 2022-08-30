@@ -7,6 +7,17 @@ import {FiLogOut} from "react-icons/fi";
 import {BsFillSunFill} from "react-icons/bs";
 import './navbar.scss'
 
+const switchPaths = (param) => {
+    switch (param) {
+        case '/':
+            return <span className='text-2xl font-bold'>Новые статьи</span>
+        case '/categories':
+            return <span className='text-2xl font-bold'>Популярные категории</span>
+        case '/liked':
+            return <span className='text-2xl font-bold'>Избранное</span>
+    }
+}
+
 const Navbar = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -14,10 +25,7 @@ const Navbar = () => {
 
     return (
         <div className='navbar__wrapper'>
-            {window.location.pathname === '/'
-                ? <span className='text-2xl font-bold'>Новые статьи</span>
-                : <span className='text-2xl font-bold'>Популярные категории</span>
-            }
+            {switchPaths(window.location.pathname)}
             {isAuth
                 ?
                 <div className='flex items-center'>
