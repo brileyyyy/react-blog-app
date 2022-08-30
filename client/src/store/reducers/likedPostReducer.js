@@ -51,7 +51,6 @@ export const deleteLikedPost = createAsyncThunk(
 
 const initialState = {
     likedPosts: [],
-    likesCount: 0,
     isLoading: false
 }
 
@@ -64,7 +63,6 @@ const likedPostSlice = createSlice({
             .addCase(createLikedPost.fulfilled, (state, action) => {
                 state.isLoading = false
                 state.likedPosts.push(action.payload)
-                state.likesCount += 1
             })
             .addCase(getLikedPosts.fulfilled, (state, action) => {
                 state.isLoading = false
@@ -77,7 +75,6 @@ const likedPostSlice = createSlice({
                 state.isLoading = false
                 state.likedPosts
                     = state.likedPosts.filter(post => post._id !== action.payload._id)
-                state.likesCount -= 1
             })
 })
 

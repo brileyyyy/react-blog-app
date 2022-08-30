@@ -15,6 +15,10 @@ const switchPaths = (param) => {
             return <span className='text-2xl font-bold'>Популярные категории</span>
         case '/liked':
             return <span className='text-2xl font-bold'>Избранное</span>
+        case '/users':
+            return <span className='text-2xl font-bold'>Пользователи</span>
+        default:
+            return <span className='text-2xl font-bold'>Новые статьи</span>
     }
 }
 

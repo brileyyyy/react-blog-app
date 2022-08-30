@@ -7,7 +7,7 @@ class LikedPostController {
 
             await Post.updateOne(
                 {_id: postId},
-                {$set: {liked: true}, $inc: {likesCount: 1}}
+                {$set: {liked: true}}
             )
             const post = await Post.findOne({_id: postId})
 
@@ -36,7 +36,7 @@ class LikedPostController {
 
             await Post.updateOne(
                 {_id: postId},
-                {$set: {liked: false}, $inc: {likesCount: -1}}
+                {$set: {liked: false}}
             )
             const post = await Post.findOne({_id: postId})
 

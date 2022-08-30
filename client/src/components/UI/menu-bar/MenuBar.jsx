@@ -30,7 +30,7 @@ const MenuBar = () => {
                     <BiCategoryAlt size={20}/>
                     <span>Категории</span>
                 </div>
-                <div className={styles.nav__item}>
+                <div className={styles.nav__item} onClick={() => navigate('/users')}>
                     <AiOutlineUser size={20}/>
                     <span>Пользователи</span>
                 </div>

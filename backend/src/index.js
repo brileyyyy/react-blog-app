@@ -2,7 +2,7 @@ import express from 'express'
 import config from 'config'
 import {connectToMongo} from "./utils/connect.js";
 import log from "./utils/logger.js";
-import authRoutes from "./routes/auth.routes.js";
+import userRoutes from "./routes/user.routes.js";
 import postRoutes from "./routes/post.routes.js";
 import uploadRoutes from "./routes/upload.routes.js";
 import commentRoutes from "./routes/comment.routes.js";
@@ -23,7 +23,7 @@ const start = async () => {
         log.info(`Server running on port ${PORT}`)
     })
 
-    authRoutes(app)
+    userRoutes(app)
     postRoutes(app)
     uploadRoutes(app)
     commentRoutes(app)

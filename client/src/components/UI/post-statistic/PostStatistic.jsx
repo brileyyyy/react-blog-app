@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 import {BiComment} from "react-icons/bi";
 import {GoEye} from "react-icons/go";
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {
     createLikedPost, deleteLikedPost
 } from "../../../store/reducers/likedPostReducer";
@@ -10,7 +10,6 @@ import '../../post-item/postItem.scss'
 
 const PostStatistic = ({post}) => {
     const dispatch = useDispatch()
-    const {likesCount} = useSelector(state => state.likedPost)
     const [liked, setLiked] = useState(post.liked)
 
     const createLikedPostHandler = () => {
@@ -26,7 +25,7 @@ const PostStatistic = ({post}) => {
     return (
         <div className='post__statistic'>
             <div className='flex items-center'>
-                <div className='mr-6 flex items-center'>
+                <div className='mr-4 flex items-center'>
                     {liked
                         ?
                         <AiFillHeart size={20} className='mr-2 text-red-500'
@@ -34,12 +33,11 @@ const PostStatistic = ({post}) => {
                         />
                         :
                         <AiOutlineHeart
-                            size={20}
+                            size={22}
                             className='mr-2'
                             onClick={createLikedPostHandler}
                         />
                     }
-                    <span className='text-lg'>{likesCount}</span>
                 </div>
                 <div className='flex items-center'>
                     <BiComment size={20} className='mr-2'/>

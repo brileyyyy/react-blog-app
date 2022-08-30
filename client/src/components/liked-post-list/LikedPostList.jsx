@@ -18,7 +18,7 @@ const LikedPostList = () => {
             </div>
             {!isLoading && !likedPosts.length &&
                 <div className='no__post'>
-                    В избранном пока постов нет
+                    В избранном пока ничего нет
                 </div>
             }
             {isLoading

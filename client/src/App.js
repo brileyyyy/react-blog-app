@@ -8,6 +8,7 @@ import CreatePostPage from "./pages/create-post-page/CreatePostPage";
 import EditPostPage from "./pages/edit-post-page/EditPostPage";
 import CategoriesPage from "./pages/categories-page/CategoriesPage";
 import LikedPostPage from "./pages/liked-post-page/LikedPostPage";
+import UsersPage from "./pages/users-page/UsersPage";
 import {useDispatch, useSelector} from "react-redux";
 import {getAuth} from "./store/reducers/userReducer";
 
@@ -32,6 +33,7 @@ const App = () => {
                             <Route path='/posts/:id/edit' element={<EditPostPage />} />
                             <Route path='/categories' element={<CategoriesPage />} />
                             <Route path='/liked' element={<LikedPostPage />} />
+                            <Route path='/users' element={<UsersPage />} />
                             <Route path='*' element={<Navigate to='/' replace={true}/>} />
                         </Route>
                         :
