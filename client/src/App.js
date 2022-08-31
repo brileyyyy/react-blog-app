@@ -11,6 +11,8 @@ import LikedPostPage from "./pages/liked-post-page/LikedPostPage";
 import UsersPage from "./pages/users-page/UsersPage";
 import {useDispatch, useSelector} from "react-redux";
 import {getAuth} from "./store/reducers/userReducer";
+import ProfilePopup from "./components/UI/popup/ProfilePopup";
+import LanguagePopup from "./components/UI/popup/LanguagePopup";
 
 const App = () => {
     const dispatch = useDispatch()
@@ -22,7 +24,7 @@ const App = () => {
 
     return (
         <>
-            <div>
+            <div className='relative'>
                 <Routes>
                     {isAuth
                         ?
@@ -44,6 +46,8 @@ const App = () => {
                         </Route>
                     }
                 </Routes>
+                <ProfilePopup/>
+                <LanguagePopup/>
             </div>
         </>
     )

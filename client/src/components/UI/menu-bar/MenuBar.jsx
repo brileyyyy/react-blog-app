@@ -1,14 +1,23 @@
 import React from 'react';
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from 'react-router-dom'
 import {RiFileList2Line} from "react-icons/ri";
 import {FcDoughnutChart} from "react-icons/fc";
 import {AiOutlineHeart, AiOutlineUser} from "react-icons/ai";
 import {BiCategoryAlt} from "react-icons/bi";
 import {MdLanguage} from "react-icons/md";
+import {setLanguagePopupDisplay} from "../../../store/reducers/popupReducer";
 import styles from './menuBar.module.scss'
 
 const MenuBar = () => {
+    const dispatch = useDispatch()
     const navigate = useNavigate()
+    const {languagePopupDisplay} = useSelector(state => state.popup)
+
+    const setPopupDisplayHandler = () => {
+        const display = (languagePopupDisplay === 'none') ? 'block' : 'none'
+        dispatch(setLanguagePopupDisplay(display))
+    }
 
     return (
         <div className={styles.container}>
@@ -35,7 +44,10 @@ const MenuBar = () => {
                     <span>Пользователи</span>
                 </div>
                 <hr className='my-1.5'/>
-                <div className={styles.nav__item}>
+                <div
+                    className='py-2 grid grid-menubar-item items-center cursor-pointer'
+                    onClick={() => setPopupDisplayHandler()}
+                >
                     <MdLanguage size={20} className='text-gray-400'/>
                     <span>Язык</span>
                 </div>

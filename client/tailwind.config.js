@@ -30,6 +30,12 @@ module.exports = {
                 },
                 '.min-h-300': {
                     minHeight: '300px'
+                },
+                '.shadow-primary': {
+                    boxShadow: '0 6px 12px -1px rgb(0, 0, 0, 0.3)'
+                },
+                '.h-min-screen': {
+                    minHeight: '100vh'
                 }
             })
         })

@@ -2,9 +2,8 @@ import React from 'react';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import Button from "../button/Button";
-import {logout} from "../../../store/reducers/userReducer";
-import {FiLogOut} from "react-icons/fi";
 import {BsFillSunFill} from "react-icons/bs";
+import {setProfilePopupDisplay} from "../../../store/reducers/popupReducer";
 import './navbar.scss'
 
 const switchPaths = (param) => {
@@ -26,6 +25,12 @@ const Navbar = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {isAuth} = useSelector(state => state.user)
+    const {profilePopupDisplay} = useSelector(state => state.popup)
+
+    const setPopupDisplayHandler = () => {
+        const display = (profilePopupDisplay === 'none') ? 'block' : 'none'
+        dispatch(setProfilePopupDisplay(display))
+    }
 
     return (
         <div className='navbar__wrapper'>
@@ -33,12 +38,13 @@ const Navbar = () => {
             {isAuth
                 ?
                 <div className='flex items-center'>
-                    <div className='logout__btn' onClick={() => dispatch(logout())}>
-                        <FiLogOut size={16} className='mr-2'/>
-                        Выйти
-                    </div>
                     <BsFillSunFill size={20} className='mx-6 cursor-pointer'/>
-                    <img className='avatar' src='images/briley.jpg' alt='user-avatar'/>
+                    <img
+                        className='avatar'
+                        src='images/briley.jpg'
+                        alt='user-avatar'
+                        onClick={() => setPopupDisplayHandler()}
+                    />
                 </div>
                 :
                 <div className='auth__btns'>

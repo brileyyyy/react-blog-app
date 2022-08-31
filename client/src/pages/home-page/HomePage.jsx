@@ -12,7 +12,7 @@ const HomePage = () => {
     const {isAuth} = useSelector(state => state.user)
 
     return (
-        <div className='mx-auto max-w-7xl grid grid-primary gap-6'>
+        <div className='mx-auto max-w-7xl h-min-screen grid grid-primary gap-6'>
             <LeftSideMenu/>
             <div>
                 <Navbar/>
