@@ -6,6 +6,7 @@ const commentRoutes = (app) => {
 
     app.get('/api/comment/:postId', authMiddleware, CommentController.getPostComments)
     app.get('/api/comment', authMiddleware, CommentController.getAllComments)
+    app.get('/api/comment/user/:userId', authMiddleware, CommentController.getAllUserComments)
 
     app.delete('/api/comment/:commentId', authMiddleware, CommentController.deleteComment)
 

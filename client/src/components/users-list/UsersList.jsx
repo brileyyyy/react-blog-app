@@ -5,7 +5,7 @@ import {getAllUsers} from "../../store/reducers/userReducer";
 
 const UsersList = () => {
     const dispatch = useDispatch()
-    const {users} = useSelector(state => state.user)
+    const {users, isLoading} = useSelector(state => state.user)
 
     useEffect(() => {
         dispatch(getAllUsers())
@@ -13,11 +13,18 @@ const UsersList = () => {
 
     return (
         <div className='my-6 bg-white rounded-md'>
-            <div className='py-4'>
-                {users.map((user, ind) =>
-                    <UsersItem user={user} key={ind}/>
-                )}
-            </div>
+            {isLoading
+                ?
+                <div className='py-8 text-l text-gray-400 text-center font-medium'>
+                    Загрузка...
+                </div>
+                :
+                <div className='py-4'>
+                    {users.map((user, ind) =>
+                        <UsersItem user={user} key={ind}/>
+                    )}
+                </div>
+            }
         </div>
     );
 };

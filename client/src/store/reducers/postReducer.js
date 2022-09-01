@@ -30,6 +30,20 @@ export const getAllPosts = createAsyncThunk(
     }
 )
 
+export const getAllUserPosts = createAsyncThunk(
+    'post/getAllUser', async (user, {rejectWithValue}) => {
+        try {
+            return (await axios.get(`http://localhost:5000/api/posts/user/${user._id}`, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })).data
+        } catch (e) {
+            return rejectWithValue(e.response.data.message)
+        }
+    }
+)
+
 export const getOnePost = createAsyncThunk(
     'post/getOne', async (data, {rejectWithValue}) => {
         try {
@@ -81,6 +95,8 @@ export const updateOnePost = createAsyncThunk(
 
 const initialState = {
     posts: [],
+    userPosts: [],
+    userPostsCount: 0,
     currentPost: {},
     isLoading: false
 }
@@ -103,6 +119,14 @@ const postReducer = createSlice({
                 state.posts = action.payload
             })
             .addCase(getAllPosts.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(getAllUserPosts.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.userPosts = action.payload.posts
+                state.userPostsCount = action.payload.postsCount
+            })
+            .addCase(getAllUserPosts.pending, (state) => {
                 state.isLoading = true
             })
             .addCase(getOnePost.fulfilled, (state, action) => {

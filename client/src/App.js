@@ -13,6 +13,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {getAuth} from "./store/reducers/userReducer";
 import ProfilePopup from "./components/UI/popup/ProfilePopup";
 import LanguagePopup from "./components/UI/popup/LanguagePopup";
+import ProfilePage from "./pages/profile-page/ProfilePage";
 
 const App = () => {
     const dispatch = useDispatch()
@@ -36,6 +37,7 @@ const App = () => {
                             <Route path='/categories' element={<CategoriesPage />} />
                             <Route path='/liked' element={<LikedPostPage />} />
                             <Route path='/users' element={<UsersPage />} />
+                            <Route path='/users/:id' element={<ProfilePage />} />
                             <Route path='*' element={<Navigate to='/' replace={true}/>} />
                         </Route>
                         :

@@ -37,6 +37,20 @@ class PostController {
         }
     }
 
+    async getAllUserPosts(req, res) {
+        try {
+            const userId = req.params.userId
+            const posts = await Post.find({user: userId})
+
+            const postsCount = await Post.find({user: userId}).count()
+
+            return res.json({posts, postsCount})
+        } catch (e) {
+            console.log(e)
+            return res.status(500).json({message: 'Get all user posts error'})
+        }
+    }
+
     async getOnePost(req, res) {
         try {
             const postId = req.params.postId

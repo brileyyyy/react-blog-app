@@ -48,6 +48,20 @@ export const getAllComments = createAsyncThunk(
     }
 )
 
+export const getAllUserComments = createAsyncThunk(
+    'comment/getAllUser', async (user, {rejectWithValue}) => {
+        try {
+            return (await axios.get(`http://localhost:5000/api/comment/user/${user._id}`, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })).data
+        } catch (e) {
+            return rejectWithValue(e.response.data.message)
+        }
+    }
+)
+
 export const deleteComment = createAsyncThunk(
     'comment/delete', async (comment, {rejectWithValue}) => {
         try {
@@ -86,6 +100,8 @@ export const updateComment = createAsyncThunk(
 const initialState = {
     comments: [],
     postComments: [],
+    userComments: [],
+    userCommentsCount: 0,
     currentComment: {}
 }
 
@@ -103,6 +119,10 @@ const commentSlice = createSlice({
             })
             .addCase(getAllComments.fulfilled, (state, action) => {
                 state.comments = action.payload
+            })
+            .addCase(getAllUserComments.fulfilled, (state, action) => {
+                state.userComments = action.payload.comments
+                state.userCommentsCount = action.payload.commentsCount
             })
             .addCase(deleteComment.fulfilled, (state, action) => {
                 state.postComments =

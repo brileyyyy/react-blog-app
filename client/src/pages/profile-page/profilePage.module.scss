@@ -1,0 +1,31 @@
+.wrapper {
+	@apply mx-auto max-w-7xl grid grid-primary gap-6
+}
+
+.bg__image {
+	@apply h-full w-full object-cover overflow-hidden rounded-t-md
+}
+
+.info__wrapper {
+	@apply h-auto bg-white rounded-b-md
+}
+
+.info {
+	@apply flex flex-col items-center
+}
+
+.avatar__image {
+	@apply absolute top-56 left-0 right-0 mx-auto w-48 h-48 object-cover rounded-full border-8 border-white
+}
+
+.user__posts__list {
+	@apply p-6 my-4 bg-white rounded-md
+}
+
+.posts__list__title {
+	@apply mb-6 flex justify-center items-center font-medium
+}
+
+.no__posts__list__title {
+	@apply flex justify-center items-center font-medium
+}

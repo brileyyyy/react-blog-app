@@ -53,6 +53,20 @@ class CommentController {
         }
     }
 
+    async getAllUserComments(req, res) {
+        try {
+            const userId = req.params.userId
+            const comments = await Comment.find({user: userId})
+
+            const commentsCount = await Comment.find({user: userId}).count()
+
+            return res.json({comments, commentsCount})
+        } catch (e) {
+            console.log(e)
+            return res.status(500).json({message: 'Get all user comments error'})
+        }
+    }
+
     async deleteComment(req, res) {
         try {
             const commentId = req.params.commentId

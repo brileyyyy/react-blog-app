@@ -1,14 +1,17 @@
 import React from 'react'
+import {useNavigate} from "react-router-dom";
 import {AiOutlineArrowRight, AiOutlineUser} from "react-icons/ai"
 import {useDispatch, useSelector} from "react-redux";
-import {logout} from "../../../store/reducers/userReducer";
+import {getOneUser, logout} from "../../../store/reducers/userReducer";
 import {setProfilePopupDisplay} from "../../../store/reducers/popupReducer";
 import Overlay from "../overlay/Overlay";
 import './popup.scss'
 
 const ProfilePopup = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     const {profilePopupDisplay} = useSelector(state => state.popup)
+    const {currentUser} = useSelector(state => state.user)
 
     return (
         <div
@@ -21,6 +24,7 @@ const ProfilePopup = () => {
             >
                 <div
                     className='profile__popup__item'
+                    onClick={() => dispatch(getOneUser({user: currentUser, navigate}))}
                 >
                     <AiOutlineUser size={20}/>
                     Профиль

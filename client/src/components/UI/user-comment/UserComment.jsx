@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {IoMdClose} from "react-icons/io";
 import {MdOutlineModeEdit} from "react-icons/md"
 import {BsCheck2} from "react-icons/bs";
@@ -8,6 +8,7 @@ import styles from './userComment.module.scss'
 
 const UserComment = ({comment}) => {
     const dispatch = useDispatch()
+    const {currentUser} = useSelector(state => state.user)
     const [edit, setEdit] = useState(false)
     const [newText, setNewText] = useState(comment.text)
 
@@ -21,7 +22,11 @@ const UserComment = ({comment}) => {
             <div className='px-6 flex justify-between'>
                 <div>
                     <div className={styles.comment__profile}>
-                        <img className={styles.comment__avatar} src='../images/briley.jpg' alt='avatar'/>
+                        <img
+                            className={styles.comment__avatar}
+                            src={currentUser.avatarURL}
+                            alt='avatar'
+                        />
                         <div>
                             <div className={styles.comment__name}>{comment.author}</div>
                             <div className={styles.comment__date}>{(comment.date).slice(0,10)}</div>

@@ -15,7 +15,7 @@ const CategoryList = () => {
     return (
         <div className='my-6 bg-white rounded-md'>
             <div className='list__sections'>
-                <span className=''>Все категории</span>
+                <span>Все категории</span>
             </div>
             <div className='post__list'>
                 {categories.map(category => <CategoryItem post={category} key={category.id}/>)}
