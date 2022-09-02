@@ -14,7 +14,12 @@ const storage = multer.diskStorage({
 const upload = multer({storage})
 
 const uploadRoutes = (app) => {
-    app.post('/api/upload', authMiddleware, upload.single('image'), UploadController.uploadImage)
+    app.post('/api/upload/post',
+        authMiddleware, upload.single('image'), UploadController.uploadPostImage)
+    app.post('/api/upload/image',
+        authMiddleware, upload.single('image'), UploadController.uploadUserAvatarImage)
+    app.post('/api/upload/bg_image',
+        authMiddleware, upload.single('image'), UploadController.uploadUserAvatarBgImage)
 }
 
 export default uploadRoutes

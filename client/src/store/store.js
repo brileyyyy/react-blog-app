@@ -4,6 +4,7 @@ import userReducer from "./reducers/userReducer";
 import commentReducer from "./reducers/commentReducer";
 import likedPostReducer from "./reducers/likedPostReducer";
 import popupReducer from "./reducers/popupReducer";
+import uploadReducer from "./reducers/uploadReducer";
 
 export const store = configureStore({
     reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
         likedPost: likedPostReducer,
         user: userReducer,
         comment: commentReducer,
-        popup: popupReducer
+        popup: popupReducer,
+        upload: uploadReducer
     }
 })

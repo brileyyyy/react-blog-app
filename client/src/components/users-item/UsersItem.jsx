@@ -14,7 +14,7 @@ const UsersItem = ({user}) => {
         >
             <img
                 className='mr-4 w-12 h-12 object-cover rounded-full'
-                src={user.avatarURL}
+                src={user.avatarUrl}
                 alt='avatar'/>
             <div>
                 <div className='text-l font-medium'>

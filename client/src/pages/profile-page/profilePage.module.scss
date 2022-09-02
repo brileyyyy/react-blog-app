@@ -2,8 +2,25 @@
 	@apply mx-auto max-w-7xl grid grid-primary gap-6
 }
 
+.bg__image__wrapper {
+	@apply relative mt-6 h-60 bg-black rounded-md
+}
+
 .bg__image {
-	@apply h-full w-full object-cover overflow-hidden rounded-t-md
+	@apply h-full w-full object-cover overflow-hidden
+	rounded-t-md transition duration-300
+}
+
+.bg__image__wrapper:hover .bg__image {
+	@apply opacity-80
+}
+
+.bg__upload__icon {
+	@apply absolute top-3 left-3 opacity-0 text-neutral-400 cursor-pointer transition duration-300
+}
+
+.bg__image__wrapper:hover .bg__upload__icon {
+	@apply opacity-100
 }
 
 .info__wrapper {
@@ -14,8 +31,25 @@
 	@apply flex flex-col items-center
 }
 
+.avatar__image__wrapper {
+	@apply absolute top-52 left-0 right-0 flex
+	justify-center mx-auto w-56 h-56 bg-white rounded-full
+}
+
 .avatar__image {
-	@apply absolute top-56 left-0 right-0 mx-auto w-48 h-48 object-cover rounded-full border-8 border-white
+	@apply absolute top-4 mx-auto w-48 h-48 object-cover rounded-full transition duration-300
+}
+
+.avatar__image__wrapper:hover .avatar__image {
+	@apply opacity-80
+}
+
+.avatar__upload__icon {
+	@apply absolute top-20 mx-auto opacity-0 text-neutral-400 cursor-pointer transition duration-300
+}
+
+.avatar__image__wrapper:hover .avatar__upload__icon {
+	@apply opacity-100
 }
 
 .user__posts__list {

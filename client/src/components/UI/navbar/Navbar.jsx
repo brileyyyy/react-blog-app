@@ -43,7 +43,7 @@ const Navbar = () => {
                     <BsFillSunFill size={20} className='mx-6 cursor-pointer'/>
                     <img
                         className='avatar'
-                        src={currentUser.avatarURL}
+                        src={currentUser.avatarUrl}
                         alt='user-avatar'
                         onClick={() => setPopupDisplayHandler()}
                     />

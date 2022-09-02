@@ -10,12 +10,15 @@ import {BiMove} from "react-icons/bi";
 import {GoEye} from "react-icons/go";
 import Button from "../../components/UI/button/Button";
 import {createPost} from "../../store/reducers/postReducer";
+import UploadPostImageForm from "../../components/UI/upload-image-form/UploadPostImageForm";
+import {setPostImageToDefault} from "../../store/reducers/uploadReducer";
 import './createPostPage.scss'
 
 const CreatePostPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {currentUser} = useSelector(state => state.user)
+    const {postImageUrl} = useSelector(state => state.upload)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [tags, setTags] = useState('')
@@ -23,25 +26,14 @@ const CreatePostPage = () => {
     function createPostHandler() {
         navigate('/')
         dispatch(createPost(
-            {author: currentUser.name, title, description, tags: tags.split(' ')}
+            {author: currentUser.name, title, description, tags: tags.split(' '), imageUrl: postImageUrl}
         ))
+        dispatch(setPostImageToDefault())
     }
 
     return (
         <div className='wrapper'>
-            <div className='upload__wrapper'>
-                <div className='upload__field'>
-                    <span className='upload__title'>
-                        Загрузите картинку
-                    </span>
-                    <div className='upload__input'>
-                        <label htmlFor='image_uploads' className='upload__input-title'>
-                            Browse...
-                        </label>
-                        <input type='file' id='image_uploads' className='hidden'/>
-                    </div>
-                </div>
-            </div>
+            <UploadPostImageForm/>
             <div className='edit__icons'>
                 <TbLetterB size={20} className='mr-3'/>
                 <AiOutlineItalic size={20} className='mr-3'/>

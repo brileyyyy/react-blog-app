@@ -25,8 +25,8 @@ const PostPage = () => {
             <div className='bg-white rounded-md'>
                 <img
                     className='h-96 w-full object-cover rounded-t-md'
-                    src="https://proprikol.ru/wp-content/uploads/2020/06/kartinki-zavtrak-35.jpg"
-                    alt="breakfast"
+                    src={currentPost.imageUrl}
+                    alt="post preview"
                 />
                 <div className='flex flex-col p-6'>
                     <div className='mb-6 text-3xl text-gray-700 font-bold'>

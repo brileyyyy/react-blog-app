@@ -1,5 +1,7 @@
 import express from 'express'
+import path from 'path'
 import config from 'config'
+import { fileURLToPath } from 'url';
 import {connectToMongo} from "./utils/connect.js";
 import log from "./utils/logger.js";
 import userRoutes from "./routes/user.routes.js";
@@ -9,12 +11,19 @@ import commentRoutes from "./routes/comment.routes.js";
 import likedPostRoutes from "./routes/likedPost.routes.js";
 import {cors} from "./middlewares/cors.middleware.js";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 const app = express()
 const PORT = config.get('server-port')
 
 app.use(cors)
 app.use(express.json())
-app.use('/uploads', express.static('uploads'))
+
+app.get('/uploads/:file', (req, res) => {
+    const file = req.params.file
+    res.sendFile(`${__dirname}/uploads/${file}`)
+})
 
 const start = async () => {
     await connectToMongo()

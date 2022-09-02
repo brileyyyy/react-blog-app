@@ -15,7 +15,7 @@ const PostItem = ({post}) => {
             <div className='container'>
                 <img
                     className='post__image'
-                    src="https://proprikol.ru/wp-content/uploads/2020/06/kartinki-zavtrak-35.jpg"
+                    src={post.imageUrl}
                     alt="post background"
                     onClick={() => dispatch(getOnePost({post, navigate, edit: false}))}
                 />
