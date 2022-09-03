@@ -1,7 +1,8 @@
 import React from 'react';
 import {MdFileUpload} from "react-icons/md";
 import {useDispatch, useSelector} from "react-redux";
-import {uploadUserAvatarImage} from "../../../store/reducers/uploadReducer";
+import {deleteUserAvatarImage, uploadUserAvatarImage} from "../../../store/reducers/uploadReducer";
+import {IoMdClose} from "react-icons/io";
 import './userAvatar.scss'
 
 const UserAvatar = () => {
@@ -19,9 +20,14 @@ const UserAvatar = () => {
         }
     }
 
+    const deleteAvatarHandler = () => {
+        const fileUrl = (userAvatarImageUrl ? userAvatarImageUrl : selectedUser.avatarUrl)
+        dispatch(deleteUserAvatarImage(fileUrl))
+    }
+
     return (
         <div className='avatar__image__wrapper'>
-            <div className='absolute top-4 w-48 h-48 bg-black rounded-full'></div>
+            <div className='absolute top-2 w-48 h-48 bg-black rounded-full'></div>
             <img
                 className='avatar__image'
                 src={userAvatarImageUrl ? userAvatarImageUrl : selectedUser.avatarUrl}
@@ -29,12 +35,19 @@ const UserAvatar = () => {
             />
             {(currentUser._id === selectedUser._id) &&
                 <>
-                    <label
-                        htmlFor='main_image_uploads'
-                        className='avatar__upload__icon'
-                    >
-                        <MdFileUpload size={58}/>
-                    </label>
+                    <div className='avatar__icon__wrapper'>
+                        <label
+                            htmlFor='main_image_uploads'
+                            className='avatar__icon'
+                        >
+                            <MdFileUpload size={40}/>
+                        </label>
+                        <IoMdClose
+                            size={32}
+                            className='avatar__icon'
+                            onClick={deleteAvatarHandler}
+                        />
+                    </div>
                     <input
                         type='file' id='main_image_uploads' name='image'
                         className='absolute top-24 left-12 hidden'

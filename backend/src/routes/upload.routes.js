@@ -20,6 +20,9 @@ const uploadRoutes = (app) => {
         authMiddleware, upload.single('image'), UploadController.uploadUserAvatarImage)
     app.post('/api/upload/bg_image',
         authMiddleware, upload.single('image'), UploadController.uploadUserAvatarBgImage)
+
+    app.delete('/api/upload/image', authMiddleware, UploadController.deleteUserAvatarImage)
+    app.delete('/api/upload/bg_image', authMiddleware, UploadController.deleteUserAvatarBgImage)
 }
 
 export default uploadRoutes

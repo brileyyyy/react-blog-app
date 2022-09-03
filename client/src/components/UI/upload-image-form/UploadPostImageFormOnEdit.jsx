@@ -44,7 +44,7 @@ const UploadPostImageFormOnEdit = ({post}) => {
                 <div className='upload__image__field__edit'>
                     <img
                         className='upload__image'
-                        src={postImageUrl}
+                        src={post.imageUrl}
                         alt='uploaded post preview'
                     />
                     <label

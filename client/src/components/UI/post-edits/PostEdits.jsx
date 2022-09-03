@@ -11,11 +11,12 @@ const PostEdits = ({post, navigate}) => {
         <div className='post__edits'>
             <MdOutlineModeEdit
                 size={26}
+                className='text-gray-300'
                 onClick={() => dispatch(getOnePost({post, navigate, edit: true}))}
             />
             <IoCloseSharp
                 size={26}
-                className='ml-2 text-red-700'
+                className='ml-2 text-red-600'
                 onClick={() => dispatch(deletePost(post))}
             />
         </div>

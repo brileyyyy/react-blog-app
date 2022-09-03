@@ -26,7 +26,7 @@ module.exports = {
                     gridTemplateColumns: '30px 1fr'
                 },
                 '.bg-white-transparent': {
-                    backgroundColor: 'rgba(255, 255, 255, 0.5)'
+                    backgroundColor: 'rgba(0, 0, 0, 0.3)'
                 },
                 '.min-h-300': {
                     minHeight: '300px'

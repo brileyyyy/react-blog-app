@@ -1,7 +1,8 @@
 import React from 'react';
 import {MdFileUpload} from "react-icons/md";
-import {uploadUserAvatarBgImage} from "../../../store/reducers/uploadReducer";
+import {deleteUserAvatarBgImage, uploadUserAvatarBgImage} from "../../../store/reducers/uploadReducer";
 import {useDispatch, useSelector} from "react-redux";
+import {IoMdClose} from "react-icons/io";
 import './userBackgroundAvatar.scss'
 
 const UserBackgroundAvatar = ({user}) => {
@@ -19,6 +20,11 @@ const UserBackgroundAvatar = ({user}) => {
         }
     }
 
+    const deleteBgAvatarHandler = () => {
+        const fileUrl = (userBgAvatarImageUrl ? userBgAvatarImageUrl : user.backgroundAvatarUrl)
+        dispatch(deleteUserAvatarBgImage(fileUrl))
+    }
+
     return (
         <div className='bg__image__wrapper'>
             <img className='bg__image'
@@ -27,15 +33,20 @@ const UserBackgroundAvatar = ({user}) => {
             />
             {(currentUser._id === user._id) &&
                 <>
-                    <label
-                        htmlFor='bg_image_uploads'
-                        className='bg__upload__icon'
-                    >
-                        <MdFileUpload size={42}/>
+                    <label htmlFor='bg_image_uploads'>
+                        <MdFileUpload
+                            size={40}
+                            className='bg__upload__icon'
+                        />
                     </label>
                     <input
                         type='file' id='bg_image_uploads' name='image'
                         className='hidden' onChange={e => uploadBgAvatarHandler(e)}
+                    />
+                    <IoMdClose
+                        size={32}
+                        className='bg__delete__icon'
+                        onClick={deleteBgAvatarHandler}
                     />
                 </>
             }

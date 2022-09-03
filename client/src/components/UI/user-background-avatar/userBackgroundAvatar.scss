@@ -8,13 +8,23 @@
 }
 
 .bg__image__wrapper:hover .bg__image {
-	@apply opacity-80
+	@apply opacity-50
 }
 
 .bg__upload__icon {
-	@apply absolute top-3 left-3 opacity-0 text-neutral-400 cursor-pointer transition duration-300
+	@apply absolute top-3 left-3 bg-white-transparent rounded-md opacity-0
+	text-neutral-400 cursor-pointer transition duration-300
 }
 
 .bg__image__wrapper:hover .bg__upload__icon {
+	@apply opacity-100
+}
+
+.bg__delete__icon {
+	@apply absolute top-3 right-3 bg-white-transparent rounded-md opacity-0
+	text-neutral-400 cursor-pointer transition duration-300
+}
+
+.bg__image__wrapper:hover .bg__delete__icon {
 	@apply opacity-100
 }
