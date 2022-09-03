@@ -1,0 +1,20 @@
+.avatar__image__wrapper {
+	@apply absolute top-52 left-0 right-0 flex
+	justify-center mx-auto w-56 h-56 bg-white rounded-full
+}
+
+.avatar__image {
+	@apply absolute top-4 mx-auto w-48 h-48 object-cover rounded-full transition duration-300
+}
+
+.avatar__image__wrapper:hover .avatar__image {
+	@apply opacity-80
+}
+
+.avatar__upload__icon {
+	@apply absolute top-20 mx-auto opacity-0 text-neutral-400 cursor-pointer transition duration-300
+}
+
+.avatar__image__wrapper:hover .avatar__upload__icon {
+	@apply opacity-100
+}
