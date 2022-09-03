@@ -21,7 +21,7 @@ const UploadPostImageFormOnEdit = ({post}) => {
 
     return (
         <div className='upload__wrapper'>
-            {post.imageUrl === DEFAULT_IMAGE_URL
+            {!postImageUrl && post.imageUrl === DEFAULT_IMAGE_URL
                 ?
                 <div className='upload__field'>
                     <span className='upload__title'>
@@ -44,7 +44,7 @@ const UploadPostImageFormOnEdit = ({post}) => {
                 <div className='upload__image__field__edit'>
                     <img
                         className='upload__image'
-                        src={postImageUrl ? postImageUrl : post.imageUrl}
+                        src={postImageUrl}
                         alt='uploaded post preview'
                     />
                     <label

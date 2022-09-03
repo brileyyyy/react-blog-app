@@ -7,6 +7,7 @@ import './userAvatar.scss'
 const UserAvatar = () => {
     const dispatch = useDispatch()
     const {currentUser, selectedUser} = useSelector(state => state.user)
+    const {userAvatarImageUrl} = useSelector(state => state.upload)
 
     const uploadAvatarHandler = (e) => {
         try {
@@ -23,7 +24,7 @@ const UserAvatar = () => {
             <div className='absolute top-4 w-48 h-48 bg-black rounded-full'></div>
             <img
                 className='avatar__image'
-                src={selectedUser.avatarUrl}
+                src={userAvatarImageUrl ? userAvatarImageUrl : selectedUser.avatarUrl}
                 alt='user-avatar'
             />
             {(currentUser._id === selectedUser._id) &&
