@@ -10,35 +10,28 @@ import {BsImage} from "react-icons/bs";
 import {BiMove} from "react-icons/bi";
 import {GoEye} from "react-icons/go";
 import Button from "../../components/UI/button/Button";
+import UploadPostImageFormOnEdit from "../../components/UI/upload-image-form/UploadPostImageFormOnEdit";
+import {setPostImageToDefault} from "../../store/reducers/uploadReducer";
 
 const EditPostPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const post = useSelector(state => state.post.currentPost)
+    const {postImageUrl} = useSelector(state => state.upload)
     const [title, setTitle] = useState(post.title)
     const [description, setDescription] = useState(post.description)
     const [tags, setTags] = useState(post.tags)
 
-    function updatePostHandler(data) {
+    function updatePostHandler() {
+        const data = {title, description, tags: tags.split(' '), imageUrl: postImageUrl}
         navigate('/')
         dispatch(updateOnePost({post, ...data}))
+        dispatch(setPostImageToDefault())
     }
 
     return (
         <div className='wrapper'>
-            <div className='upload__wrapper'>
-                <div className='upload__field'>
-                    <span className='upload__title'>
-                        Загрузите картинку
-                    </span>
-                    <div className='upload__input'>
-                        <label htmlFor='image_uploads' className='upload__input-title'>
-                            Browse...
-                        </label>
-                        <input type='file' id='image_uploads' className='hidden'/>
-                    </div>
-                </div>
-            </div>
+            <UploadPostImageFormOnEdit post={post}/>
             <div className='edit__icons'>
                 <TbLetterB size={20} className='mr-3'/>
                 <AiOutlineItalic size={20} className='mr-3'/>
@@ -87,7 +80,7 @@ const EditPostPage = () => {
                 <div className='flex items-center'>
                     <Button
                         className='post__btn'
-                        onClick={() => updatePostHandler({title, description, tags: tags.split(' ')})}
+                        onClick={() => updatePostHandler()}
                     >
                         Опубликовать
                     </Button>

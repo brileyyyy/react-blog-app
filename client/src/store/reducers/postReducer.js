@@ -74,9 +74,9 @@ export const deletePost = createAsyncThunk(
 export const updateOnePost = createAsyncThunk(
     'post/updateOne', async (data, {rejectWithValue}) => {
         try {
-            const {post, title, description, tags} = data
+            const {post, title, description, tags, imageUrl} = data
             const response = await axios.patch(`http://localhost:5000/api/posts/${post._id}`, {
-                title, description, tags
+                title, description, tags, imageUrl
             }, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('token')}`

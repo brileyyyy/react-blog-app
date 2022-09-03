@@ -1,0 +1,1 @@
+export const DEFAULT_IMAGE_URL = 'https://i.imgur.com/TF0ZEH7.jpg'

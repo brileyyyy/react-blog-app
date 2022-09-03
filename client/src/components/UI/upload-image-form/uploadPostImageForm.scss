@@ -10,6 +10,26 @@
 	@apply py-4 flex flex-col justify-center items-center border border-gray-200 rounded-md
 }
 
+.upload__image__field__edit {
+	@apply relative py-4 flex flex-col justify-center items-center border border-gray-200 rounded-md
+}
+
+.upload__image {
+	@apply max-h-52 object-cover rounded-md hover:opacity-50 transition duration-300
+}
+
+.upload__icon {
+	@apply absolute top-24 mx-auto text-neutral-700 opacity-0 cursor-pointer transition duration-300
+}
+
+.upload__image__field__edit:hover .upload__image {
+	@apply opacity-50
+}
+
+.upload__image__field__edit:hover .upload__icon {
+	@apply opacity-100
+}
+
 .upload__title {
 	@apply mb-4 text-gray-500 font-medium
 }

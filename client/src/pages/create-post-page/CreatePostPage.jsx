@@ -12,21 +12,26 @@ import Button from "../../components/UI/button/Button";
 import {createPost} from "../../store/reducers/postReducer";
 import UploadPostImageForm from "../../components/UI/upload-image-form/UploadPostImageForm";
 import {setPostImageToDefault} from "../../store/reducers/uploadReducer";
+import {DEFAULT_IMAGE_URL} from "../../config/url";
 import './createPostPage.scss'
 
 const CreatePostPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {currentUser} = useSelector(state => state.user)
-    const {postImageUrl} = useSelector(state => state.upload)
+    let {postImageUrl} = useSelector(state => state.upload)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [tags, setTags] = useState('')
 
     function createPostHandler() {
         navigate('/')
+        if (!postImageUrl) {
+            postImageUrl = DEFAULT_IMAGE_URL
+        }
         dispatch(createPost(
-            {author: currentUser.name, title, description, tags: tags.split(' '), imageUrl: postImageUrl}
+            {author: currentUser.name, title, description, tags: tags.split(' '),
+                imageUrl: postImageUrl}
         ))
         dispatch(setPostImageToDefault())
     }
