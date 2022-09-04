@@ -28,7 +28,7 @@ class PostController {
 
     async getAllPosts(req, res) {
         try {
-            const allPosts = await Post.find().populate('user').exec()
+            const allPosts = (await Post.find().populate('user').exec()).reverse()
 
             return res.json(allPosts)
         } catch (e) {
@@ -121,6 +121,17 @@ class PostController {
         } catch (e) {
             console.log(e)
             return res.status(500).json({message: 'Update post error'})
+        }
+    }
+
+    async uploadPostImage(req, res) {
+        try {
+            const imageURL = `http://localhost:5000/uploads/${req.file.originalname}`
+
+            return res.json(imageURL)
+        } catch (e) {
+            console.log(e)
+            return res.status(500).json({message: 'Upload post image error'})
         }
     }
 }

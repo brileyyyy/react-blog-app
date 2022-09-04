@@ -90,23 +90,42 @@ export const updateOnePost = createAsyncThunk(
     }
 )
 
+export const uploadPostImage = createAsyncThunk(
+    'upload/image', async (data, {rejectWithValue}) => {
+        try {
+            return (await axios.post('http://localhost:5000/api/posts/upload', data, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })).data
+        } catch (e) {
+            return rejectWithValue(e.response.data.message)
+        }
+    }
+)
+
 const initialState = {
     posts: [],
     userPosts: [],
     userPostsCount: 0,
     currentPost: {},
+    postImageUrl: '',
     isLoading: false
 }
 
 const postReducer = createSlice({
     name: 'post',
     initialState,
-    reducers: {},
+    reducers: {
+        setPostImageToDefault(state) {
+            state.postImageUrl = ''
+        }
+    },
     extraReducers: builder => {
         builder
             .addCase(createPost.fulfilled, (state, action) => {
                 state.isLoading = false
-                state.posts.push(action.payload)
+                state.posts.unshift(action.payload)
             })
             .addCase(createPost.pending, (state) => {
                 state.isLoading = true
@@ -140,7 +159,11 @@ const postReducer = createSlice({
             .addCase(updateOnePost.pending, (state) => {
                 state.isLoading = true
             })
+            .addCase(uploadPostImage.fulfilled, (state, action) => {
+                state.postImageUrl = action.payload
+            })
     }
 })
 
 export default postReducer.reducer
+export const {setPostImageToDefault} = postReducer.actions

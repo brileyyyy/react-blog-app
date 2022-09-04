@@ -1,14 +1,16 @@
 import React from 'react';
 import {MdFileUpload} from "react-icons/md";
 import {useDispatch, useSelector} from "react-redux";
-import {deleteUserAvatarImage, uploadUserAvatarImage} from "../../../store/reducers/uploadReducer";
+import {
+    deleteUserAvatarImage, uploadUserAvatarImage
+} from "../../../store/reducers/userProfileReducer";
 import {IoMdClose} from "react-icons/io";
 import './userAvatar.scss'
 
 const UserAvatar = () => {
     const dispatch = useDispatch()
-    const {currentUser, selectedUser} = useSelector(state => state.user)
-    const {userAvatarImageUrl} = useSelector(state => state.upload)
+    const {currentUser} = useSelector(state => state.user)
+    const {selectedUser} = useSelector(state => state.userProfile)
 
     const uploadAvatarHandler = (e) => {
         try {
@@ -20,17 +22,12 @@ const UserAvatar = () => {
         }
     }
 
-    const deleteAvatarHandler = () => {
-        const fileUrl = (userAvatarImageUrl ? userAvatarImageUrl : selectedUser.avatarUrl)
-        dispatch(deleteUserAvatarImage(fileUrl))
-    }
-
     return (
         <div className='avatar__image__wrapper'>
             <div className='absolute top-2 w-48 h-48 bg-black rounded-full'></div>
             <img
                 className='avatar__image'
-                src={userAvatarImageUrl ? userAvatarImageUrl : selectedUser.avatarUrl}
+                src={selectedUser.avatarUrl}
                 alt='user-avatar'
             />
             {(currentUser._id === selectedUser._id) &&
@@ -45,7 +42,7 @@ const UserAvatar = () => {
                         <IoMdClose
                             size={32}
                             className='avatar__icon'
-                            onClick={deleteAvatarHandler}
+                            onClick={() => dispatch(deleteUserAvatarImage(selectedUser.avatarUrl))}
                         />
                     </div>
                     <input

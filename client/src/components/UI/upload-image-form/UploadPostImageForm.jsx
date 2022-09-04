@@ -1,11 +1,11 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {uploadPostImage} from "../../../store/reducers/uploadReducer";
+import {uploadPostImage} from "../../../store/reducers/postReducer";
 import './uploadPostImageForm.scss'
 
 const UploadPostImageForm = () => {
     const dispatch = useDispatch()
-    const {postImageUrl} = useSelector(state => state.upload)
+    const {postImageUrl} = useSelector(state => state.post)
 
     const uploadImageHandler = async (e) => {
         try {

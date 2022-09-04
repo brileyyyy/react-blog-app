@@ -6,7 +6,7 @@ import {connectToMongo} from "./utils/connect.js";
 import log from "./utils/logger.js";
 import userRoutes from "./routes/user.routes.js";
 import postRoutes from "./routes/post.routes.js";
-import uploadRoutes from "./routes/upload.routes.js";
+import userProfileRoutes from "./routes/userProfile.routes.js";
 import commentRoutes from "./routes/comment.routes.js";
 import likedPostRoutes from "./routes/likedPost.routes.js";
 import {cors} from "./middlewares/cors.middleware.js";
@@ -34,7 +34,7 @@ const start = async () => {
 
     userRoutes(app)
     postRoutes(app)
-    uploadRoutes(app)
+    userProfileRoutes(app)
     commentRoutes(app)
     likedPostRoutes(app)
 }

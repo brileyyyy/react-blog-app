@@ -1,15 +1,17 @@
 import User from "../models/User.js";
 import DeleteImageService from "../services/deleteImage.service.js";
+import Comment from "../models/Comment.js";
 
-class UploadController {
-    async uploadPostImage(req, res) {
+class UserProfileController {
+    async getUserProfile(req, res) {
         try {
-            const imageURL = `http://localhost:5000/uploads/${req.file.originalname}`
+            const userId = req.params.userId
+            const foundUser = await User.findOne({_id: userId})
 
-            return res.json(imageURL)
+            return res.json(foundUser)
         } catch (e) {
             console.log(e)
-            return res.status(500).json({message: 'Upload image error'})
+            return res.status(500).json({message: 'Get one user error'})
         }
     }
 
@@ -22,8 +24,13 @@ class UploadController {
                 {_id: userId},
                 {$set: {avatarUrl: imageURL}}
             )
+            await Comment.updateMany(
+                {user: userId},
+                {$set: {avatar: imageURL}}
+            )
+            const user = await User.findOne({_id: userId})
 
-            return res.json(imageURL)
+            return res.json(user)
         } catch (e) {
             console.log(e)
             return res.status(500).json({message: 'Upload user avatar image error'})
@@ -39,8 +46,9 @@ class UploadController {
                 {_id: userId},
                 {$set: {backgroundAvatarUrl: imageURL}}
             )
+            const user = await User.findOne({_id: userId})
 
-            return res.json(imageURL)
+            return res.json(user)
         } catch (e) {
             console.log(e)
             return res.status(500).json({message: 'Upload user avatar background image error'})
@@ -86,4 +94,4 @@ class UploadController {
     }
 }
 
-export default new UploadController()
+export default new UserProfileController()

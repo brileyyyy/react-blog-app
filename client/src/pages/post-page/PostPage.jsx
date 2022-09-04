@@ -16,7 +16,7 @@ const PostPage = () => {
     }, [dispatch])
 
     function addCommentHandler() {
-        dispatch(addComment({author: currentUser.name, currentPost, avatar: '', text}))
+        dispatch(addComment({author: currentUser.name, currentPost, avatar: currentUser.avatarUrl, text}))
         setText('')
     }
 

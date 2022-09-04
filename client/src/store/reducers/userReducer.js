@@ -66,28 +66,9 @@ export const getAllUsers = createAsyncThunk(
     }
 )
 
-export const getOneUser = createAsyncThunk(
-    'user/getOne', async (data, {rejectWithValue}) => {
-        try {
-            const {user, navigate} = data
-            const response = await axios.get(`http://localhost:5000/api/users/${user._id}`, {
-                headers: {
-                    authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-            })
-            navigate(`/users/${user._id}`)
-
-            return response.data
-        } catch (e) {
-            return rejectWithValue(e.response.data.message)
-        }
-    }
-)
-
 const initialState = {
     currentUser: {},
     users: [],
-    selectedUser: {},
     isAuth: false,
     nameError: null,
     emailError: null,
@@ -156,9 +137,6 @@ const userSlice = createSlice({
             })
             .addCase(getAllUsers.pending, (state) => {
                 state.isLoading = true
-            })
-            .addCase(getOneUser.fulfilled, (state, action) => {
-                state.selectedUser = action.payload
             })
     }
 })

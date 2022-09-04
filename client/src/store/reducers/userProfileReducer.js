@@ -2,14 +2,18 @@ import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
 import {DEFAULT_IMAGE_URL} from "../../config/url";
 
-export const uploadPostImage = createAsyncThunk(
-    'upload/image', async (data, {rejectWithValue}) => {
+export const getUserProfile = createAsyncThunk(
+    'user/getOne', async (data, {rejectWithValue}) => {
         try {
-            return (await axios.post('http://localhost:5000/api/upload/post', data, {
+            const {user, navigate} = data
+            const response = await axios.get(`http://localhost:5000/api/user_profile/${user._id}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('token')}`
                 }
-            })).data
+            })
+            navigate(`/users/${user._id}`)
+
+            return response.data
         } catch (e) {
             return rejectWithValue(e.response.data.message)
         }
@@ -31,7 +35,7 @@ export const uploadUserAvatarImage = createAsyncThunk(
 )
 
 export const uploadUserAvatarBgImage = createAsyncThunk(
-    'upload/deleteAvatar', async (data, {rejectWithValue}) => {
+    'upload/backgroundAvatar', async (data, {rejectWithValue}) => {
         try {
             return (await axios.post('http://localhost:5000/api/upload/bg_image', data, {
                 headers: {
@@ -45,15 +49,13 @@ export const uploadUserAvatarBgImage = createAsyncThunk(
 )
 
 export const deleteUserAvatarImage = createAsyncThunk(
-    'upload/deleteBgAvatar', async (filePath, {rejectWithValue}) => {
+    'upload/deleteAvatar', async (filePath, {rejectWithValue}) => {
         try {
             await axios.delete(`http://localhost:5000/api/upload/image`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('token')}`
                 },
-                data: {
-                    filePath
-                }
+                data: {filePath}
             })
         } catch (e) {
             return rejectWithValue(e.response.data.message)
@@ -62,15 +64,13 @@ export const deleteUserAvatarImage = createAsyncThunk(
 )
 
 export const deleteUserAvatarBgImage = createAsyncThunk(
-    'upload/delete', async (filePath, {rejectWithValue}) => {
+    'upload/deleteBgAvatar', async (filePath, {rejectWithValue}) => {
         try {
             await axios.delete(`http://localhost:5000/api/upload/bg_image`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('token')}`
                 },
-                data: {
-                    filePath
-                }
+                data: {filePath}
             })
         } catch (e) {
             return rejectWithValue(e.response.data.message)
@@ -79,37 +79,30 @@ export const deleteUserAvatarBgImage = createAsyncThunk(
 )
 
 const initialState = {
-    postImageUrl: '',
-    userAvatarImageUrl: '',
-    userBgAvatarImageUrl: ''
+    selectedUser: {},
 }
 
-const uploadSlice = createSlice({
+const userProfileSlice = createSlice({
     name: 'upload',
     initialState,
-    reducers: {
-        setPostImageToDefault(state) {
-            state.postImageUrl = ''
-        }
-    },
+    reducers: {},
     extraReducers: builder =>
         builder
-            .addCase(uploadPostImage.fulfilled, (state, action) => {
-                state.postImageUrl = action.payload
+            .addCase(getUserProfile.fulfilled, (state, action) => {
+                state.selectedUser = action.payload
             })
             .addCase(uploadUserAvatarImage.fulfilled, (state, action) => {
-                state.userAvatarImageUrl = action.payload
+                state.selectedUser = action.payload
             })
             .addCase(uploadUserAvatarBgImage.fulfilled, (state, action) => {
-                state.userBgAvatarImageUrl = action.payload
+                state.selectedUser = action.payload
             })
             .addCase(deleteUserAvatarImage.fulfilled, (state) => {
-                state.userAvatarImageUrl = DEFAULT_IMAGE_URL
+                state.selectedUser.avatarUrl = DEFAULT_IMAGE_URL
             })
             .addCase(deleteUserAvatarBgImage.fulfilled, (state) => {
-                state.userBgAvatarImageUrl = DEFAULT_IMAGE_URL
+                state.selectedUser.backgroundAvatarUrl = DEFAULT_IMAGE_URL
             })
 })
 
-export default uploadSlice.reducer
-export const {setPostImageToDefault} = uploadSlice.actions
+export default userProfileSlice.reducer

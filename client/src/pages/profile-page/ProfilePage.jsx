@@ -11,7 +11,7 @@ import UserBackgroundAvatar from "../../components/UI/user-background-avatar/Use
 
 const ProfilePage = () => {
     const dispatch = useDispatch()
-    const {selectedUser} = useSelector(state => state.user)
+    const {selectedUser} = useSelector(state => state.userProfile)
 
     useEffect(() => {
         dispatch(getAllUserPosts(selectedUser))

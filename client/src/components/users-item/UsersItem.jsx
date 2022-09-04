@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {getOneUser} from "../../store/reducers/userReducer";
+import {getUserProfile} from "../../store/reducers/userProfileReducer";
 
 const UsersItem = ({user}) => {
     const dispatch = useDispatch()
@@ -10,7 +10,7 @@ const UsersItem = ({user}) => {
     return (
         <div
             className='px-6 py-4 flex items-center hover:bg-gray-50 transition cursor-pointer'
-            onClick={() => dispatch(getOneUser({user, navigate}))}
+            onClick={() => dispatch(getUserProfile({user, navigate}))}
         >
             <img
                 className='mr-4 w-12 h-12 object-cover rounded-full'

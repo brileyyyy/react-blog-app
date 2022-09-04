@@ -10,7 +10,6 @@ const userRoutes = (app) => {
 
     app.get('/api/auth/me', authMiddleware, UserController.getAuth)
     app.get('/api/users', authMiddleware, UserController.getAllUsers)
-    app.get('/api/users/:userId', authMiddleware, UserController.getOneUser)
 }
 
 export default userRoutes

@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {IoMdClose} from "react-icons/io";
 import {MdOutlineModeEdit} from "react-icons/md"
 import {BsCheck2} from "react-icons/bs";
@@ -8,7 +8,6 @@ import styles from './userComment.module.scss'
 
 const UserComment = ({comment}) => {
     const dispatch = useDispatch()
-    const {currentUser} = useSelector(state => state.user)
     const [edit, setEdit] = useState(false)
     const [newText, setNewText] = useState(comment.text)
 
@@ -24,7 +23,7 @@ const UserComment = ({comment}) => {
                     <div className={styles.comment__profile}>
                         <img
                             className={styles.comment__avatar}
-                            src={currentUser.avatarURL}
+                            src={comment.avatar}
                             alt='avatar'
                         />
                         <div>

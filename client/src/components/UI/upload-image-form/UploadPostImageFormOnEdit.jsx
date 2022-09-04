@@ -1,13 +1,13 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {uploadPostImage} from "../../../store/reducers/uploadReducer";
+import {uploadPostImage} from "../../../store/reducers/postReducer";
 import {DEFAULT_IMAGE_URL} from "../../../config/url";
 import {MdFileUpload} from "react-icons/md";
 import './uploadPostImageForm.scss'
 
 const UploadPostImageFormOnEdit = ({post}) => {
     const dispatch = useDispatch()
-    const {postImageUrl} = useSelector(state => state.upload)
+    const {postImageUrl} = useSelector(state => state.post)
 
     const uploadImageHandler = async (e) => {
         try {
@@ -44,7 +44,7 @@ const UploadPostImageFormOnEdit = ({post}) => {
                 <div className='upload__image__field__edit'>
                     <img
                         className='upload__image'
-                        src={post.imageUrl}
+                        src={postImageUrl ? postImageUrl : post.imageUrl}
                         alt='uploaded post preview'
                     />
                     <label

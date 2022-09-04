@@ -11,7 +11,7 @@ import {GoEye} from "react-icons/go";
 import Button from "../../components/UI/button/Button";
 import {createPost} from "../../store/reducers/postReducer";
 import UploadPostImageForm from "../../components/UI/upload-image-form/UploadPostImageForm";
-import {setPostImageToDefault} from "../../store/reducers/uploadReducer";
+import {setPostImageToDefault} from "../../store/reducers/postReducer";
 import {DEFAULT_IMAGE_URL} from "../../config/url";
 import './createPostPage.scss'
 
@@ -19,7 +19,7 @@ const CreatePostPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {currentUser} = useSelector(state => state.user)
-    let {postImageUrl} = useSelector(state => state.upload)
+    let {postImageUrl} = useSelector(state => state.post)
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [tags, setTags] = useState('')

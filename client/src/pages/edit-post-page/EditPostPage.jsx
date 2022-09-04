@@ -11,13 +11,13 @@ import {BiMove} from "react-icons/bi";
 import {GoEye} from "react-icons/go";
 import Button from "../../components/UI/button/Button";
 import UploadPostImageFormOnEdit from "../../components/UI/upload-image-form/UploadPostImageFormOnEdit";
-import {setPostImageToDefault} from "../../store/reducers/uploadReducer";
+import {setPostImageToDefault} from "../../store/reducers/postReducer";
 
 const EditPostPage = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const post = useSelector(state => state.post.currentPost)
-    const {postImageUrl} = useSelector(state => state.upload)
+    const {postImageUrl} = useSelector(state => state.post)
     const [title, setTitle] = useState(post.title)
     const [description, setDescription] = useState(post.description)
     const [tags, setTags] = useState(post.tags)
@@ -82,7 +82,7 @@ const EditPostPage = () => {
                         className='post__btn'
                         onClick={() => updatePostHandler()}
                     >
-                        Опубликовать
+                        Сохранить
                     </Button>
                     <div className='post__cancel' onClick={() => navigate('/')}>
                         Отмена

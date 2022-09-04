@@ -1,6 +1,6 @@
 import React from 'react';
 import {MdFileUpload} from "react-icons/md";
-import {deleteUserAvatarBgImage, uploadUserAvatarBgImage} from "../../../store/reducers/uploadReducer";
+import {deleteUserAvatarBgImage, uploadUserAvatarBgImage} from "../../../store/reducers/userProfileReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {IoMdClose} from "react-icons/io";
 import './userBackgroundAvatar.scss'
@@ -8,7 +8,7 @@ import './userBackgroundAvatar.scss'
 const UserBackgroundAvatar = ({user}) => {
     const dispatch = useDispatch()
     const {currentUser} = useSelector(state => state.user)
-    const {userBgAvatarImageUrl} = useSelector(state => state.upload)
+    const {userBgAvatarImageUrl} = useSelector(state => state.userProfile)
 
     const uploadBgAvatarHandler = (e) => {
         try {
