@@ -1,6 +1,6 @@
 import React from 'react';
 import {MdFileUpload} from "react-icons/md";
-import {deleteUserAvatarBgImage, uploadUserAvatarBgImage} from "../../../store/reducers/userProfileReducer";
+import {deleteUserAvatarBgImage, uploadUserAvatarBgImage} from "../../../store/reducers/userReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {IoMdClose} from "react-icons/io";
 import './userBackgroundAvatar.scss'
@@ -8,7 +8,6 @@ import './userBackgroundAvatar.scss'
 const UserBackgroundAvatar = ({user}) => {
     const dispatch = useDispatch()
     const {currentUser} = useSelector(state => state.user)
-    const {userBgAvatarImageUrl} = useSelector(state => state.userProfile)
 
     const uploadBgAvatarHandler = (e) => {
         try {
@@ -20,19 +19,15 @@ const UserBackgroundAvatar = ({user}) => {
         }
     }
 
-    const deleteBgAvatarHandler = () => {
-        const fileUrl = (userBgAvatarImageUrl ? userBgAvatarImageUrl : user.backgroundAvatarUrl)
-        dispatch(deleteUserAvatarBgImage(fileUrl))
-    }
-
     return (
         <div className='bg__image__wrapper'>
-            <img className='bg__image'
-                 src={userBgAvatarImageUrl ? userBgAvatarImageUrl : user.backgroundAvatarUrl}
-                 alt='profile-background'
-            />
-            {(currentUser._id === user._id) &&
+            {(currentUser._id === user._id)
+                ?
                 <>
+                    <img className='bg__image'
+                         src={currentUser.backgroundAvatarUrl}
+                         alt='profile-background'
+                    />
                     <label htmlFor='bg_image_uploads'>
                         <MdFileUpload
                             size={40}
@@ -46,9 +41,14 @@ const UserBackgroundAvatar = ({user}) => {
                     <IoMdClose
                         size={32}
                         className='bg__delete__icon'
-                        onClick={deleteBgAvatarHandler}
+                        onClick={() => dispatch(deleteUserAvatarBgImage(user.backgroundAvatarUrl))}
                     />
                 </>
+                :
+                <img className='bg__image'
+                     src={user.backgroundAvatarUrl}
+                     alt='profile-background'
+                />
             }
         </div>
     );

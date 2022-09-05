@@ -26,7 +26,7 @@ const switchPaths = (param, user) => {
 const Navbar = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const {isAuth} = useSelector(state => state.user)
+    const {isAuth, currentUser} = useSelector(state => state.user)
     const {selectedUser} = useSelector(state => state.userProfile)
     const {profilePopupDisplay} = useSelector(state => state.popup)
 
@@ -44,7 +44,7 @@ const Navbar = () => {
                     <BsFillSunFill size={20} className='mx-6 cursor-pointer'/>
                     <img
                         className='avatar'
-                        src={selectedUser.avatarUrl}
+                        src={currentUser.avatarUrl}
                         alt='user-avatar'
                         onClick={() => setPopupDisplayHandler()}
                     />

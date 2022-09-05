@@ -1,5 +1,6 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 import axios from "axios";
+import {DEFAULT_IMAGE_URL} from "../../config/url";
 
 export const registration = createAsyncThunk(
     'user/registration', async (data, {rejectWithValue}) => {
@@ -60,6 +61,64 @@ export const getAllUsers = createAsyncThunk(
                     authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             })).data
+        } catch (e) {
+            return rejectWithValue(e.response.data.message)
+        }
+    }
+)
+
+export const uploadUserAvatarImage = createAsyncThunk(
+    'upload/avatar', async (data, {rejectWithValue}) => {
+        try {
+            return (await axios.post('http://localhost:5000/api/upload/image', data, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })).data
+        } catch (e) {
+            return rejectWithValue(e.response.data.message)
+        }
+    }
+)
+
+export const uploadUserAvatarBgImage = createAsyncThunk(
+    'upload/backgroundAvatar', async (data, {rejectWithValue}) => {
+        try {
+            return (await axios.post('http://localhost:5000/api/upload/bg_image', data, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })).data
+        } catch (e) {
+            return rejectWithValue(e.response.data.message)
+        }
+    }
+)
+
+export const deleteUserAvatarImage = createAsyncThunk(
+    'upload/deleteAvatar', async (filePath, {rejectWithValue}) => {
+        try {
+            await axios.delete(`http://localhost:5000/api/upload/image`, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+                data: {filePath}
+            })
+        } catch (e) {
+            return rejectWithValue(e.response.data.message)
+        }
+    }
+)
+
+export const deleteUserAvatarBgImage = createAsyncThunk(
+    'upload/deleteBgAvatar', async (filePath, {rejectWithValue}) => {
+        try {
+            await axios.delete(`http://localhost:5000/api/upload/bg_image`, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+                data: {filePath}
+            })
         } catch (e) {
             return rejectWithValue(e.response.data.message)
         }
@@ -137,6 +196,18 @@ const userSlice = createSlice({
             })
             .addCase(getAllUsers.pending, (state) => {
                 state.isLoading = true
+            })
+            .addCase(uploadUserAvatarImage.fulfilled, (state, action) => {
+                state.currentUser = action.payload
+            })
+            .addCase(uploadUserAvatarBgImage.fulfilled, (state, action) => {
+                state.currentUser = action.payload
+            })
+            .addCase(deleteUserAvatarImage.fulfilled, (state) => {
+                state.currentUser.avatarUrl = DEFAULT_IMAGE_URL
+            })
+            .addCase(deleteUserAvatarBgImage.fulfilled, (state) => {
+                state.currentUser.backgroundAvatarUrl = DEFAULT_IMAGE_URL
             })
     }
 })

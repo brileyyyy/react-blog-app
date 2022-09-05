@@ -11,7 +11,7 @@ const postModel = new mongoose.Schema(
         imageUrl: {type: String, default: ''},
         comments: [{type: mongoose.Schema.Types.ObjectId, ref: 'Comment'}],
         commentsCount: {type: Number, default: 0},
-        liked: {type: Boolean, default: false},
+        likes: [{type: mongoose.Schema.Types.ObjectId, ref: 'User'}]
     },
     {
         timestamps: true

@@ -6,7 +6,7 @@ export const addComment = createAsyncThunk(
         try {
             const {author, currentPost, avatar, text} = data
             const response = await axios.post('http://localhost:5000/api/comment', {
-                author, postId: currentPost._id, avatar, date: Date.now(), text
+                author, postId: currentPost._id, avatar, text
             }, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('token')}`

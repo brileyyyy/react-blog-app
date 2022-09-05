@@ -3,11 +3,12 @@ import Post from "../models/Post.js";
 class LikedPostController {
     async createLikedPost(req, res) {
         try {
+            const userId = res.locals.user._id
             const postId = req.params.postId
 
             await Post.updateOne(
                 {_id: postId},
-                {$set: {liked: true}}
+                {$push: {likes: userId}}
             )
             const post = await Post.findOne({_id: postId})
 
@@ -21,7 +22,7 @@ class LikedPostController {
     async getLikedPosts(req, res) {
         try {
             const userId = res.locals.user._id
-            const likedPosts = await Post.find({user: userId, liked: true})
+            const likedPosts = (await Post.find({likes: userId}).exec()).reverse()
 
             return res.json(likedPosts)
         } catch (e) {
@@ -32,11 +33,12 @@ class LikedPostController {
 
     async deleteLikedPost(req, res) {
         try {
+            const userId = res.locals.user._id
             const postId = req.params.postId
 
             await Post.updateOne(
                 {_id: postId},
-                {$set: {liked: false}}
+                {$pull: {likes: userId}}
             )
             const post = await Post.findOne({_id: postId})
 

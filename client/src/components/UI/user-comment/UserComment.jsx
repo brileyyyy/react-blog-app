@@ -28,7 +28,7 @@ const UserComment = ({comment}) => {
                         />
                         <div>
                             <div className={styles.comment__name}>{comment.author}</div>
-                            <div className={styles.comment__date}>{(comment.date).slice(0,10)}</div>
+                            <div className={styles.comment__date}>{(comment.createdAt).slice(0,10)}</div>
                         </div>
                     </div>
                 </div>

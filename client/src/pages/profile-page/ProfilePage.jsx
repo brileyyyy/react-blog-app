@@ -25,7 +25,7 @@ const ProfilePage = () => {
                 <Navbar/>
                 <UserBackgroundAvatar user={selectedUser}/>
                 <UserInfo user={selectedUser}/>
-                <UserAvatar/>
+                <UserAvatar user={selectedUser}/>
                 <UserPostList/>
             </div>
         </div>

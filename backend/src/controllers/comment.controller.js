@@ -5,7 +5,7 @@ import Post from "../models/Post.js";
 class CommentController {
     async addComment(req, res) {
         try {
-            const {author, postId, avatar, date, text} = req.body
+            const {author, postId, avatar, text} = req.body
             const userId = res.locals.user._id
 
             const user = await User.findOne({_id: userId})
@@ -16,7 +16,7 @@ class CommentController {
             )
 
             const newComment
-                = await Comment.create({avatar, text, date, author, user: userId, post: postId})
+                = await Comment.create({avatar, text, author, user: userId, post: postId})
 
             user.comments.push(newComment._id)
             post.comments.push(newComment._id)

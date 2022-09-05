@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 import {BiComment} from "react-icons/bi";
 import {GoEye} from "react-icons/go";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {
     createLikedPost, deleteLikedPost
 } from "../../../store/reducers/likedPostReducer";
@@ -10,15 +10,18 @@ import '../../post-item/postItem.scss'
 
 const PostStatistic = ({post}) => {
     const dispatch = useDispatch()
-    const [liked, setLiked] = useState(post.liked)
+    const {currentUser} = useSelector(state => state.user)
+    const [like, setLike] = useState(false)
+    const [unLike, setUnLike] = useState(false)
+    const likedUser = post.likes.find(like => like === currentUser._id)
 
     const createLikedPostHandler = () => {
-        setLiked(true)
+        setLike(true)
         dispatch(createLikedPost(post))
     }
 
     const removeFromLikedHandler = () => {
-        setLiked(false)
+        setUnLike(true)
         dispatch(deleteLikedPost(post))
     }
 
@@ -26,9 +29,11 @@ const PostStatistic = ({post}) => {
         <div className='post__statistic'>
             <div className='flex items-center'>
                 <div className='mr-4 flex items-center'>
-                    {liked
+                    {(likedUser ? ((likedUser && !unLike) ? likedUser : like) : (like && !unLike))
                         ?
-                        <AiFillHeart size={20} className='mr-2 text-red-500'
+                        <AiFillHeart
+                            size={22}
+                            className='mr-2 text-red-500'
                             onClick={removeFromLikedHandler}
                         />
                         :
