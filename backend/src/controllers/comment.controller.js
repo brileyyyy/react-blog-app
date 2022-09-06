@@ -44,7 +44,7 @@ class CommentController {
 
     async getAllComments(req, res) {
         try {
-            const comments = await Comment.find()
+            const comments = (await Comment.find().populate('user').exec()).reverse()
 
             return res.json(comments)
         } catch (e) {

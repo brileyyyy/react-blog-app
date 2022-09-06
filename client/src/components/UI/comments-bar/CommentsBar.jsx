@@ -1,15 +1,26 @@
-import React from 'react';
-import UserComment from "../user-comment/UserComment";
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {getAllComments} from "../../../store/reducers/commentReducer";
+import CommentsBarItem from "../comments-bar-item/CommentsBarItem";
 
 const CommentsBar = () => {
+    const dispatch = useDispatch()
+    const {comments} = useSelector(state => state.comment)
+
+    useEffect(() => {
+        dispatch(getAllComments())
+    }, [])
+
     return (
-        <div className='p-4 bg-white rounded-md'>
+        <div className='mb-4 p-4 bg-white rounded-md'>
             <span className='font-bold'>
-                Комментарии
+                Новые комментарии
             </span>
-            {/*<UserComment/>*/}
-            {/*<UserComment/>*/}
-            {/*<UserComment/>*/}
+            <div className='mt-3'>
+                {comments.map(comment =>
+                    <CommentsBarItem comment={comment} key={comment._id}/>
+                )}
+            </div>
         </div>
     );
 };

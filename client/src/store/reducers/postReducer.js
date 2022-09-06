@@ -55,6 +55,22 @@ export const getOnePost = createAsyncThunk(
     }
 )
 
+export const getOnePostByComment = createAsyncThunk(
+    'post/getOneByComment', async (data, {rejectWithValue}) => {
+        try {
+            const {comment, navigate, edit} = data
+            const response = await axios.get(`http://localhost:5000/api/posts/comment/${comment._id}`)
+
+            const post = response.data
+            edit ? navigate(`/posts/${post._id}/edit`) : navigate(`/posts/${post._id}`)
+
+            return post
+        } catch (e) {
+            return rejectWithValue(e.response.data.message)
+        }
+    }
+)
+
 export const deletePost = createAsyncThunk(
     'post/delete', async (post, {rejectWithValue}) => {
         try {
@@ -146,6 +162,9 @@ const postReducer = createSlice({
                 state.isLoading = true
             })
             .addCase(getOnePost.fulfilled, (state, action) => {
+                state.currentPost = action.payload
+            })
+            .addCase(getOnePostByComment.fulfilled, (state, action) => {
                 state.currentPost = action.payload
             })
             .addCase(deletePost.fulfilled, (state, action) => {

@@ -19,17 +19,15 @@ const UserComment = ({comment}) => {
     return (
         <div className='py-3'>
             <div className='px-6 flex justify-between'>
-                <div>
-                    <div className={styles.comment__profile}>
-                        <img
-                            className={styles.comment__avatar}
-                            src={comment.avatar}
-                            alt='avatar'
-                        />
-                        <div>
-                            <div className={styles.comment__name}>{comment.author}</div>
-                            <div className={styles.comment__date}>{(comment.createdAt).slice(0,10)}</div>
-                        </div>
+                <div className={styles.comment__profile}>
+                    <img
+                        className={styles.comment__avatar}
+                        src={comment.avatar}
+                        alt='avatar'
+                    />
+                    <div>
+                        <div className={styles.comment__name}>{comment.author}</div>
+                        <div className={styles.comment__date}>{(comment.createdAt).slice(0,10)}</div>
                     </div>
                 </div>
                 {!edit
@@ -69,7 +67,6 @@ const UserComment = ({comment}) => {
                 }
             </div>
         </div>
-
     );
 };
 

@@ -24,6 +24,7 @@ const postRoutes = (app) => {
     app.get('/api/posts', PostController.getAllPosts)
     app.get('/api/posts/user/:userId', authMiddleware, PostController.getAllUserPosts)
     app.get('/api/posts/:postId', PostController.getOnePost)
+    app.get('/api/posts/comment/:commentId', PostController.getOnePostByComment)
 
     app.delete('/api/posts/:postId', authMiddleware, PostController.deletePost)
 

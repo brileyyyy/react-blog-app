@@ -1,5 +1,5 @@
 .comment__profile {
-	@apply mb-2 flex items-center
+	@apply mb-1 flex items-center
 }
 
 .comment__avatar {
@@ -15,9 +15,9 @@
 }
 
 .comment__body {
-	@apply my-1 text-l text-gray-600
+	@apply text-l text-gray-600
 }
 
 .comment__edit__body {
-	@apply my-1 w-full text-l text-gray-600 outline-none resize-none
+	@apply w-full text-l text-gray-600 outline-none resize-none
 }
