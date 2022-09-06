@@ -20,7 +20,7 @@ const EditPostPage = () => {
     const {postImageUrl} = useSelector(state => state.post)
     const [title, setTitle] = useState(post.title)
     const [description, setDescription] = useState(post.description)
-    const [tags, setTags] = useState(post.tags)
+    const [tags, setTags] = useState(post.tags.toString().replaceAll(',', ' '))
 
     function updatePostHandler() {
         const data = {title, description, tags: tags.split(' '), imageUrl: postImageUrl}

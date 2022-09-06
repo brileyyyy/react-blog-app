@@ -2,13 +2,14 @@ import React from 'react';
 import {useNavigate} from "react-router-dom";
 import PostStatistic from "../UI/post-statistic/PostStatistic";
 import PostEdits from "../UI/post-edits/PostEdits";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {getOnePost} from "../../store/reducers/postReducer";
 import './postItem.scss'
 
 const PostItem = ({post}) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const {currentUser} = useSelector(state => state.user)
 
     return (
         <div>
@@ -19,7 +20,9 @@ const PostItem = ({post}) => {
                     alt="post background"
                     onClick={() => dispatch(getOnePost({post, navigate, edit: false}))}
                 />
-                <PostEdits post={post} navigate={navigate}/>
+                {currentUser.name === post.author &&
+                    <PostEdits post={post} navigate={navigate}/>
+                }
                 <PostStatistic post={post}/>
             </div>
             <div className='pt-2 px-2'>

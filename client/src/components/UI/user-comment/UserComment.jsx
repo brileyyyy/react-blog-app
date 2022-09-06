@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {IoMdClose} from "react-icons/io";
 import {MdOutlineModeEdit} from "react-icons/md"
 import {BsCheck2} from "react-icons/bs";
@@ -8,6 +8,7 @@ import styles from './userComment.module.scss'
 
 const UserComment = ({comment}) => {
     const dispatch = useDispatch()
+    const {currentUser} = useSelector(state => state.user)
     const [edit, setEdit] = useState(false)
     const [newText, setNewText] = useState(comment.text)
 
@@ -30,41 +31,52 @@ const UserComment = ({comment}) => {
                         <div className={styles.comment__date}>{(comment.createdAt).slice(0,10)}</div>
                     </div>
                 </div>
-                {!edit
+                {currentUser.name === comment.author
                     ?
-                    <div className='flex'>
-                        <MdOutlineModeEdit
-                            size={20}
+                    (!edit
+                        ?
+                        <div className='flex'>
+                            <MdOutlineModeEdit
+                                size={20}
+                                className='text-gray-400 cursor-pointer'
+                                onClick={() => setEdit(true)}
+                            />
+                            <IoMdClose
+                                size={20}
+                                className='text-gray-400 cursor-pointer ml-3'
+                                onClick={() => dispatch(deleteComment(comment))}
+                            />
+                        </div>
+                        :
+                        <BsCheck2
+                            size={22}
                             className='text-gray-400 cursor-pointer'
-                            onClick={() => setEdit(true)}
-                        />
-                        <IoMdClose
-                            size={20}
-                            className='text-gray-400 cursor-pointer ml-3'
-                            onClick={() => dispatch(deleteComment(comment))}
-                        />
-                    </div>
+                            onClick={() => confirmEditHandler()}
+                        />)
                     :
-                    <BsCheck2
-                        size={22}
-                        className='text-gray-400 cursor-pointer'
-                        onClick={() => confirmEditHandler()}
-                    />
+                    ''
                 }
             </div>
             <div className='px-6 ml-16'>
-                {!edit
+                {currentUser.name === comment.author
                     ?
+                    !edit
+                        ?
+                        <div className={styles.comment__body}>
+                            {comment.text}
+                        </div>
+                        :
+                        <textarea
+                            value={newText}
+                            className={styles.comment__edit__body}
+                            onChange={e => setNewText(e.target.value)}
+                        />
+                    :
                     <div className={styles.comment__body}>
                         {comment.text}
                     </div>
-                    :
-                    <textarea
-                        value={newText}
-                        className={styles.comment__edit__body}
-                        onChange={e => setNewText(e.target.value)}
-                    />
                 }
+
             </div>
         </div>
     );
