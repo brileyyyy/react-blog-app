@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import PostStatistic from "../UI/post-statistic/PostStatistic";
 import PostEdits from "../UI/post-edits/PostEdits";
 import {useDispatch, useSelector} from "react-redux";
-import {getOnePost} from "../../store/reducers/postReducer";
+import {getOnePost} from "../../store/actions/postActions";
 import './postItem.scss'
 
 const PostItem = ({post}) => {

@@ -1,6 +1,8 @@
 import React from 'react';
 import {MdFileUpload} from "react-icons/md";
-import {deleteUserAvatarBgImage, uploadUserAvatarBgImage} from "../../../store/reducers/userReducer";
+import {
+    deleteUserAvatarBgImage, uploadUserAvatarBgImage
+} from "../../../store/actions/userActions";
 import {useDispatch, useSelector} from "react-redux";
 import {IoMdClose} from "react-icons/io";
 import './userBackgroundAvatar.scss'

@@ -3,7 +3,7 @@ import {MdFileUpload} from "react-icons/md";
 import {useDispatch, useSelector} from "react-redux";
 import {
     deleteUserAvatarImage, uploadUserAvatarImage
-} from "../../../store/reducers/userReducer";
+} from "../../../store/actions/userActions";
 import {IoMdClose} from "react-icons/io";
 import './userAvatar.scss'
 

@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import UsersItem from "../users-item/UsersItem";
-import {getAllUsers} from "../../store/reducers/userReducer";
+import {getAllUsers} from "../../store/actions/userActions";
 
 const UsersList = () => {
     const dispatch = useDispatch()

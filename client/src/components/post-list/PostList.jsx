@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import PostItem from "../post-item/PostItem";
 import {useDispatch, useSelector} from "react-redux";
-import {getAllPosts} from "../../store/reducers/postReducer";
+import {getAllPosts} from "../../store/actions/postActions";
 import './postList.scss'
 
 const PostList = () => {

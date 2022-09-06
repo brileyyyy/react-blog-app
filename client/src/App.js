@@ -10,7 +10,7 @@ import CategoriesPage from "./pages/categories-page/CategoriesPage";
 import LikedPostPage from "./pages/liked-post-page/LikedPostPage";
 import UsersPage from "./pages/users-page/UsersPage";
 import {useDispatch, useSelector} from "react-redux";
-import {getAuth} from "./store/reducers/userReducer";
+import {getAuth} from "./store/actions/userActions";
 import ProfilePopup from "./components/UI/popup/ProfilePopup";
 import LanguagePopup from "./components/UI/popup/LanguagePopup";
 import ProfilePage from "./pages/profile-page/ProfilePage";

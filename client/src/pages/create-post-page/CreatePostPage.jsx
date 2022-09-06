@@ -9,7 +9,7 @@ import {BsImage} from "react-icons/bs";
 import {BiMove} from "react-icons/bi";
 import {GoEye} from "react-icons/go";
 import Button from "../../components/UI/button/Button";
-import {createPost} from "../../store/reducers/postReducer";
+import {createPost} from "../../store/actions/postActions";
 import UploadPostImageForm from "../../components/UI/upload-image-form/UploadPostImageForm";
 import {setPostImageToDefault} from "../../store/reducers/postReducer";
 import {DEFAULT_IMAGE_URL} from "../../config/url";

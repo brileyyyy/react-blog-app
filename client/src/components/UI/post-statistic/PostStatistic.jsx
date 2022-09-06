@@ -3,9 +3,7 @@ import {AiFillHeart, AiOutlineHeart} from "react-icons/ai";
 import {BiComment} from "react-icons/bi";
 import {GoEye} from "react-icons/go";
 import {useDispatch, useSelector} from "react-redux";
-import {
-    createLikedPost, deleteLikedPost
-} from "../../../store/reducers/likedPostReducer";
+import {createLikedPost, deleteLikedPost} from "../../../store/actions/likedPostActions";
 import '../../post-item/postItem.scss'
 
 const PostStatistic = ({post}) => {

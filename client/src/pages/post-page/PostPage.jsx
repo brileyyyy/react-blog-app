@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import Button from "../../components/UI/button/Button";
-import {addComment, getPostComments} from "../../store/reducers/commentReducer";
+import {addComment, getPostComments} from "../../store/actions/commentActions";
 import UserComment from "../../components/UI/user-comment/UserComment";
 
 const PostPage = () => {

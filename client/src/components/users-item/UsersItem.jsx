@@ -1,7 +1,7 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {getUserProfile} from "../../store/reducers/userProfileReducer";
+import {getUserProfile} from "../../store/actions/userProfileActions";
 
 const UsersItem = ({user}) => {
     const dispatch = useDispatch()

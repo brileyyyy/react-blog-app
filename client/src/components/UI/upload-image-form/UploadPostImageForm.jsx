@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {uploadPostImage} from "../../../store/reducers/postReducer";
+import {uploadPostImage} from "../../../store/actions/postActions";
 import './uploadPostImageForm.scss'
 
 const UploadPostImageForm = () => {

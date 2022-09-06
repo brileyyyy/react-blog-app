@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {uploadPostImage} from "../../../store/reducers/postReducer";
+import {uploadPostImage} from "../../../store/actions/postActions";
 import {DEFAULT_IMAGE_URL} from "../../../config/url";
 import {MdFileUpload} from "react-icons/md";
 import './uploadPostImageForm.scss'

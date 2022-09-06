@@ -1,6 +1,6 @@
 import React from 'react';
 import {MdOutlineModeEdit} from "react-icons/md";
-import {deletePost, getOnePost} from "../../../store/reducers/postReducer";
+import {deletePost, getOnePost} from "../../../store/actions/postActions";
 import {IoCloseSharp} from "react-icons/io5";
 import {useDispatch} from "react-redux";
 

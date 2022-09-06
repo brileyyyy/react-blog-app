@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import {AiOutlineArrowRight, AiOutlineUser} from "react-icons/ai"
 import {useDispatch, useSelector} from "react-redux";
 import {logout} from "../../../store/reducers/userReducer";
-import {getUserProfile} from "../../../store/reducers/userProfileReducer";
+import {getUserProfile} from "../../../store/actions/userProfileActions";
 import {setProfilePopupDisplay} from "../../../store/reducers/popupReducer";
 import Overlay from "../overlay/Overlay";
 import './popup.scss'

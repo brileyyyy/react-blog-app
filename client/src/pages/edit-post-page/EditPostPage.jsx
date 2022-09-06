@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
-import {updateOnePost} from "../../store/reducers/postReducer";
+import {updateOnePost} from "../../store/actions/postActions";
 import {TbLetterB, TbLetterH} from "react-icons/tb";
 import {AiOutlineItalic, AiOutlineLine} from "react-icons/ai";
 import {FaListOl, FaListUl, FaQuoteLeft} from "react-icons/fa";

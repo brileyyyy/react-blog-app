@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import LikedPostItem from "../liked-post-item/LikedPostItem";
 import {useDispatch, useSelector} from "react-redux";
-import {getLikedPosts} from "../../store/reducers/likedPostReducer";
+import {getLikedPosts} from "../../store/actions/likedPostActions";
 
 const LikedPostList = () => {
     const dispatch = useDispatch()

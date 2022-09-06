@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {IoMdClose} from "react-icons/io";
 import {MdOutlineModeEdit} from "react-icons/md"
 import {BsCheck2} from "react-icons/bs";
-import {deleteComment, updateComment} from "../../../store/reducers/commentReducer";
+import {deleteComment, updateComment} from "../../../store/actions/commentActions";
 import styles from './userComment.module.scss'
 
 const UserComment = ({comment}) => {

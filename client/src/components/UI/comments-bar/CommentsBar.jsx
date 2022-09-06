@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {getAllComments} from "../../../store/reducers/commentReducer";
+import {getAllComments} from "../../../store/actions/commentActions";
 import CommentsBarItem from "../comments-bar-item/CommentsBarItem";
 
 const CommentsBar = () => {

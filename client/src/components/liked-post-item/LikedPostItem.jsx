@@ -2,7 +2,7 @@ import React from 'react';
 import {useNavigate} from "react-router-dom";
 import PostStatistic from "../UI/post-statistic/PostStatistic";
 import {useDispatch} from "react-redux";
-import {getOnePost} from "../../store/reducers/postReducer";
+import {getOnePost} from "../../store/actions/postActions";
 
 const LikedPostItem = ({post}) => {
     const dispatch = useDispatch()

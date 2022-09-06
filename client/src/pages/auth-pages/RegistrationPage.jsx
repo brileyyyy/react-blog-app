@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import {NavLink, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {registration, resetErrors} from "../../store/reducers/userReducer";
+import {resetErrors} from "../../store/reducers/userReducer";
+import {registration} from "../../store/actions/userActions";
 import './authPages.scss'
 
 const RegistrationPage = () => {
