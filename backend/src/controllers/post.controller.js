@@ -162,6 +162,25 @@ class PostController {
             return res.status(500).json({message: 'Upload post image error'})
         }
     }
+
+    async searchPosts(req, res) {
+        try {
+            const searchName = req.query.search
+            const userId = res.locals.user._id
+
+            let posts = await Post.find({user: userId})
+            if (searchName[0] === '#') {
+                posts = posts.filter(post => post.tags.includes(searchName))
+            } else {
+                posts = posts.filter(post => post.title.includes(searchName))
+            }
+
+            return res.json(posts)
+        } catch (e) {
+            console.log(e)
+            return res.status(400).json({ message: 'Search post error' })
+        }
+    }
 }
 
 export default new PostController()

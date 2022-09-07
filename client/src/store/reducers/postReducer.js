@@ -5,7 +5,7 @@ import {
     getAllPosts,
     getAllUserPosts,
     getOnePost,
-    getOnePostByComment, updateOnePost, uploadPostImage
+    getOnePostByComment, searchPosts, updateOnePost, uploadPostImage
 } from "../actions/postActions";
 
 const initialState = {
@@ -68,6 +68,13 @@ const postReducer = createSlice({
             })
             .addCase(uploadPostImage.fulfilled, (state, action) => {
                 state.postImageUrl = action.payload
+            })
+            .addCase(searchPosts.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.posts = action.payload
+            })
+            .addCase(searchPosts.pending, (state) => {
+                state.isLoading = true
             })
     }
 })

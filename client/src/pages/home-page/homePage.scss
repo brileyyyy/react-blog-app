@@ -1,0 +1,19 @@
+.home__wrapper {
+	@apply mx-auto max-w-7xl h-min-screen grid grid-primary gap-6
+}
+
+.post__functions {
+	@apply mt-6 mr-6 flex items-center text-l
+}
+
+.search__field {
+	@apply w-96 py-3 px-4 bg-white rounded-md focus:outline-none placeholder:text-gray-400
+}
+
+.create__post__btn {
+	@apply ml-auto mr-6 btn-primary bg-yellow-300
+}
+
+.categories__btn {
+	@apply btn-primary bg-lime-300
+}

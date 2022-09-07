@@ -107,9 +107,23 @@ export const updateOnePost = createAsyncThunk(
 )
 
 export const uploadPostImage = createAsyncThunk(
-    'upload/image', async (data, {rejectWithValue}) => {
+    'post/UploadImage', async (data, {rejectWithValue}) => {
         try {
             return (await axios.post('http://localhost:5000/api/posts/upload', data, {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })).data
+        } catch (e) {
+            return rejectWithValue(e.response.data.message)
+        }
+    }
+)
+
+export const searchPosts = createAsyncThunk(
+    'post/search', async (searchName, {rejectWithValue}) => {
+        try {
+            return (await axios.get(`http://localhost:5000/api/search/posts?search=${encodeURIComponent(searchName)}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('token')}`
                 }
