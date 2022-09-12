@@ -6,7 +6,7 @@ import LeftSideMenu from "../../components/leftside-menu/LeftsideMenu";
 import Button from "../../components/UI/button/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {BiCategoryAlt} from "react-icons/bi";
-import {getAllPosts, searchPosts} from "../../store/actions/postActions";
+import {getAllPosts} from "../../store/actions/postActions";
 import './homePage.scss'
 
 const HomePage = () => {
@@ -16,18 +16,17 @@ const HomePage = () => {
     const [searchName, setSearchName] = useState('')
     const [searchTimeout, setSearchTimeout] = useState(false)
 
-    function searchFilesHandler(e) {
+    function searchPostsHandler(e) {
         setSearchName(e.target.value)
-        if (searchTimeout != false) {
+        if (searchTimeout !== false) {
             clearTimeout(searchTimeout)
         }
-        // dispatch(showLoader())
         if (e.target.value !== '') {
             setSearchTimeout(setTimeout((value) => {
-                dispatch(searchPosts(value))
+                dispatch(getAllPosts({sortValue: value}))
             }, 500, e.target.value))
         } else {
-            dispatch(getAllPosts())
+            dispatch(getAllPosts({sortType: 'all'}))
         }
     }
 
@@ -44,7 +43,7 @@ const HomePage = () => {
                             value={searchName}
                             type="text"
                             placeholder='Введите название поста или тэг...'
-                            onChange={e => searchFilesHandler(e)}
+                            onChange={e => searchPostsHandler(e)}
                         />
                         <Button
                             className='create__post__btn'

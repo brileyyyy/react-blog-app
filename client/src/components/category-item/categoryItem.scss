@@ -8,7 +8,7 @@
 }
 
 .category__title {
-	@apply absolute pt-2 px-2 font-medium text-neutral-200 opacity-0;
+	@apply absolute pt-2 px-2 text-xl font-medium text-neutral-200 opacity-0;
 	transition: .25s ease;
 	top: 50%;
 	left: 50%;

@@ -5,11 +5,12 @@ import {
     getAllPosts,
     getAllUserPosts,
     getOnePost,
-    getOnePostByComment, searchPosts, updateOnePost, uploadPostImage
+    getOnePostByComment, updateOnePost, uploadPostImage
 } from "../actions/postActions";
 
 const initialState = {
     posts: [],
+    postSortValue: {sortType: 'all'},
     userPosts: [],
     userPostsCount: 0,
     currentPost: {},
@@ -23,6 +24,9 @@ const postReducer = createSlice({
     reducers: {
         setPostImageToDefault(state) {
             state.postImageUrl = ''
+        },
+        setPostSortValue(state, action) {
+            state.postSortValue = action.payload
         }
     },
     extraReducers: builder => {
@@ -69,15 +73,8 @@ const postReducer = createSlice({
             .addCase(uploadPostImage.fulfilled, (state, action) => {
                 state.postImageUrl = action.payload
             })
-            .addCase(searchPosts.fulfilled, (state, action) => {
-                state.isLoading = false
-                state.posts = action.payload
-            })
-            .addCase(searchPosts.pending, (state) => {
-                state.isLoading = true
-            })
     }
 })
 
 export default postReducer.reducer
-export const {setPostImageToDefault} = postReducer.actions
+export const {setPostImageToDefault, setPostSortValue} = postReducer.actions

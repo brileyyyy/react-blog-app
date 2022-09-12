@@ -2,14 +2,16 @@ import React, {useEffect} from 'react';
 import PostItem from "../post-item/PostItem";
 import {useDispatch, useSelector} from "react-redux";
 import {getAllPosts} from "../../store/actions/postActions";
+import {setPostSortValue} from "../../store/reducers/postReducer";
 import './postList.scss'
 
 const PostList = () => {
     const dispatch = useDispatch()
-    const {posts, isLoading} = useSelector(state => state.post)
+    const {posts, postSortValue, isLoading} = useSelector(state => state.post)
 
     useEffect(() => {
-        dispatch(getAllPosts())
+        dispatch(getAllPosts(postSortValue))
+        dispatch(setPostSortValue({sortType: 'all'}))
     }, [dispatch])
 
     return (

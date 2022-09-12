@@ -28,9 +28,28 @@ class PostController {
 
     async getAllPosts(req, res) {
         try {
-            const allPosts = (await Post.find().populate('user').exec()).reverse()
+            const {sortType, sortValue} = req.query
 
-            return res.json(allPosts)
+            let posts
+            switch (sortType) {
+                case 'all':
+                    posts = (await Post.find().populate('user').exec()).reverse()
+                    break
+                case 'category':
+                    posts = await Post.find()
+                    posts = posts.filter(post => post.tags.includes(sortValue))
+                    break
+                default:
+                    posts = await Post.find()
+                    if (sortValue[0] === '#') {
+                        posts = posts.filter(post => post.tags.includes(sortValue))
+                    } else {
+                        posts = posts.filter(post => post.title.includes(sortValue))
+                    }
+                    break
+            }
+
+            return res.json(posts)
         } catch (e) {
             console.log(e)
             return res.status(500).json({message: 'Get all post error'})
@@ -160,25 +179,6 @@ class PostController {
         } catch (e) {
             console.log(e)
             return res.status(500).json({message: 'Upload post image error'})
-        }
-    }
-
-    async searchPosts(req, res) {
-        try {
-            const searchName = req.query.search
-            const userId = res.locals.user._id
-
-            let posts = await Post.find({user: userId})
-            if (searchName[0] === '#') {
-                posts = posts.filter(post => post.tags.includes(searchName))
-            } else {
-                posts = posts.filter(post => post.title.includes(searchName))
-            }
-
-            return res.json(posts)
-        } catch (e) {
-            console.log(e)
-            return res.status(400).json({ message: 'Search post error' })
         }
     }
 }

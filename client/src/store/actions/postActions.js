@@ -18,9 +18,22 @@ export const createPost = createAsyncThunk(
 )
 
 export const getAllPosts = createAsyncThunk(
-    'post/getAll', async (_, {rejectWithValue}) => {
+    'post/getAll', async (data, {rejectWithValue}) => {
         try {
-            return (await axios.get('http://localhost:5000/api/posts')).data
+            const {sortType, sortValue} = data
+            let url = 'http://localhost:5000/api/posts'
+
+            if (sortType && sortValue) {
+                url = `http://localhost:5000/api/posts?sortType=${sortType}&sortValue=${encodeURIComponent(sortValue)}`
+            } else if (sortType) {
+                url = `http://localhost:5000/api/posts?sortType=${sortType}`
+            } else if (sortValue) {
+                url = `http://localhost:5000/api/posts?sortValue=${encodeURIComponent(sortValue)}`
+            }
+
+            const response = await axios.get(url)
+
+            return response.data
         } catch (e) {
             return rejectWithValue(e.response.data.message)
         }
@@ -110,20 +123,6 @@ export const uploadPostImage = createAsyncThunk(
     'post/UploadImage', async (data, {rejectWithValue}) => {
         try {
             return (await axios.post('http://localhost:5000/api/posts/upload', data, {
-                headers: {
-                    authorization: `Bearer ${localStorage.getItem('token')}`
-                }
-            })).data
-        } catch (e) {
-            return rejectWithValue(e.response.data.message)
-        }
-    }
-)
-
-export const searchPosts = createAsyncThunk(
-    'post/search', async (searchName, {rejectWithValue}) => {
-        try {
-            return (await axios.get(`http://localhost:5000/api/search/posts?search=${encodeURIComponent(searchName)}`, {
                 headers: {
                     authorization: `Bearer ${localStorage.getItem('token')}`
                 }
