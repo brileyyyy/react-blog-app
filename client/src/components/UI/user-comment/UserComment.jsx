@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {IoMdClose} from "react-icons/io";
 import {MdOutlineModeEdit} from "react-icons/md"
@@ -6,7 +6,7 @@ import {BsCheck2} from "react-icons/bs";
 import {deleteComment, updateComment} from "../../../store/actions/commentActions";
 import styles from './userComment.module.scss'
 
-const UserComment = ({comment}) => {
+const UserComment = memo(({comment}) => {
     const dispatch = useDispatch()
     const {currentUser} = useSelector(state => state.user)
     const [edit, setEdit] = useState(false)
@@ -80,6 +80,6 @@ const UserComment = ({comment}) => {
             </div>
         </div>
     );
-};
+});
 
 export default UserComment;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from 'react-router-dom'
 import {RiFileList2Line} from "react-icons/ri";
@@ -9,7 +9,7 @@ import {MdLanguage} from "react-icons/md";
 import {setLanguagePopupDisplay} from "../../../store/reducers/popupReducer";
 import styles from './menuBar.module.scss'
 
-const MenuBar = () => {
+const MenuBar = memo(() => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {languagePopupDisplay} = useSelector(state => state.popup)
@@ -54,6 +54,6 @@ const MenuBar = () => {
             </div>
         </div>
     );
-};
+});
 
 export default MenuBar;

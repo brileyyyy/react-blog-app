@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {memo, useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import UsersItem from "../users-item/UsersItem";
 import {getAllUsers} from "../../store/actions/userActions";
 
-const UsersList = () => {
+const UsersList = memo(() => {
     const dispatch = useDispatch()
     const {users, isLoading} = useSelector(state => state.user)
 
@@ -27,6 +27,6 @@ const UsersList = () => {
             }
         </div>
     );
-};
+});
 
 export default UsersList;

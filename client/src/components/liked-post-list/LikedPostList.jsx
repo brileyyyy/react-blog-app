@@ -1,9 +1,9 @@
-import React, {useEffect} from 'react';
+import React, {memo, useEffect} from 'react';
 import LikedPostItem from "../liked-post-item/LikedPostItem";
 import {useDispatch, useSelector} from "react-redux";
 import {getLikedPosts} from "../../store/actions/likedPostActions";
 
-const LikedPostList = () => {
+const LikedPostList = memo(() => {
     const dispatch = useDispatch()
     const {likedPosts, isLoading} = useSelector(state => state.likedPost)
 
@@ -36,6 +36,6 @@ const LikedPostList = () => {
             }
         </div>
     );
-};
+});
 
 export default LikedPostList;

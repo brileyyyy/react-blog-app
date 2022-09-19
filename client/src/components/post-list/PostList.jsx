@@ -1,11 +1,11 @@
-import React, {useEffect} from 'react';
+import React, {memo, useEffect} from 'react';
 import PostItem from "../post-item/PostItem";
 import {useDispatch, useSelector} from "react-redux";
 import {getAllPosts} from "../../store/actions/postActions";
 import {setPostSortValue} from "../../store/reducers/postReducer";
 import './postList.scss'
 
-const PostList = () => {
+const PostList = memo(() => {
     const dispatch = useDispatch()
     const {posts, postSortValue, isLoading} = useSelector(state => state.post)
 
@@ -38,6 +38,6 @@ const PostList = () => {
             }
         </div>
     );
-};
+});
 
 export default PostList;

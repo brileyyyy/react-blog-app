@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {memo} from 'react';
 import MenuBar from "../UI/menu-bar/MenuBar";
 import TagsBar from "../UI/tags-bar/TagsBar";
 import CommentsBar from "../UI/comments-bar/CommentsBar";
 
-const LeftSideMenu = () => {
+const LeftSideMenu = memo(() => {
     return (
         <div>
             <MenuBar/>
@@ -11,6 +11,6 @@ const LeftSideMenu = () => {
             <CommentsBar/>
         </div>
     );
-};
+});
 
 export default LeftSideMenu;

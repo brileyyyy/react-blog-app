@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {getUserProfile} from "../../store/actions/userProfileActions";
 
-const UsersItem = ({user}) => {
+const UsersItem = memo(({user}) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -26,6 +26,6 @@ const UsersItem = ({user}) => {
             </div>
         </div>
     );
-};
+});
 
 export default UsersItem;

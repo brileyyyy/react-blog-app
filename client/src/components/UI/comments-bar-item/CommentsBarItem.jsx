@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {useDispatch} from "react-redux";
 import {useNavigate} from "react-router-dom";
 import {getOnePostByComment} from "../../../store/actions/postActions";
 
-const CommentsBarItem = ({comment}) => {
+const CommentsBarItem = memo(({comment}) => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -36,6 +36,6 @@ const CommentsBarItem = ({comment}) => {
             </div>
         </div>
     );
-};
+});
 
 export default CommentsBarItem;

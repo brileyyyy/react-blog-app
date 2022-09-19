@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {BsHash} from "react-icons/bs";
 import styles from './tagsBar.module.scss'
 
-const TagsBar = () => {
+const TagsBar = memo(() => {
     return (
         <div className={styles.container}>
             <span className='font-bold'>
@@ -24,6 +24,6 @@ const TagsBar = () => {
             </div>
         </div>
     );
-};
+});
 
 export default TagsBar;

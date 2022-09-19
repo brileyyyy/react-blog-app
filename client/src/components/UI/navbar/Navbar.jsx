@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import Button from "../button/Button";
@@ -23,7 +23,7 @@ const switchPaths = (param, user) => {
     }
 }
 
-const Navbar = () => {
+const Navbar = memo(() => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {isAuth, currentUser} = useSelector(state => state.user)
@@ -61,6 +61,6 @@ const Navbar = () => {
             }
         </div>
     );
-};
+});
 
 export default Navbar;
