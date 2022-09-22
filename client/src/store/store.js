@@ -5,6 +5,7 @@ import commentReducer from "./reducers/commentReducer";
 import likedPostReducer from "./reducers/likedPostReducer";
 import popupReducer from "./reducers/popupReducer";
 import userProfileReducer from "./reducers/userProfileReducer";
+import tagReducer from "./reducers/tagReducer";
 
 export const store = configureStore({
     reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
         user: userReducer,
         comment: commentReducer,
         popup: popupReducer,
-        userProfile: userProfileReducer
+        userProfile: userProfileReducer,
+        tag: tagReducer
     }
 })

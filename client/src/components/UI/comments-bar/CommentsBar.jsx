@@ -16,11 +16,19 @@ const CommentsBar = memo(() => {
             <span className='font-bold'>
                 Новые комментарии
             </span>
-            <div className='mt-3'>
-                {comments.map(comment =>
-                    <CommentsBarItem comment={comment} key={comment._id}/>
-                )}
-            </div>
+            {comments.length
+                ?
+                <div className='mt-3'>
+                    {comments.map(comment =>
+                        <CommentsBarItem comment={comment} key={comment._id}/>
+                    )}
+                </div>
+                :
+                <div className='mt-3 text-l text-gray-400 font-medium'>
+                    Тут появятся недавние комментарии
+                </div>
+            }
+
         </div>
     );
 });

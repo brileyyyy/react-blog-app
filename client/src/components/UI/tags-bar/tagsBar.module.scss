@@ -9,3 +9,7 @@
 .tags__item {
 	@apply py-1 grid grid-menubar-item items-center rounded-md
 }
+
+.no__tags {
+	@apply mt-3 text-l text-gray-400 font-medium
+}

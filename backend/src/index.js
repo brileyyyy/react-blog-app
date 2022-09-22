@@ -10,6 +10,7 @@ import userProfileRoutes from "./routes/userProfile.routes.js";
 import commentRoutes from "./routes/comment.routes.js";
 import likedPostRoutes from "./routes/likedPost.routes.js";
 import {cors} from "./middlewares/cors.middleware.js";
+import tagRoutes from "./routes/tag.routes.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -37,6 +38,7 @@ const start = async () => {
     userProfileRoutes(app)
     commentRoutes(app)
     likedPostRoutes(app)
+    tagRoutes(app)
 }
 
 start()

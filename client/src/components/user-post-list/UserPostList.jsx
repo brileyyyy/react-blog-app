@@ -8,7 +8,7 @@ const UserPostList = () => {
     return (
         <div className='p-6 my-4 bg-white rounded-md'>
             {!isLoading && !userPosts.length &&
-                <div className='flex justify-center items-center font-medium'>
+                <div className='flex justify-center items-center text-gray-400 font-medium'>
                     У пользователя пока нет постов
                 </div>
             }
