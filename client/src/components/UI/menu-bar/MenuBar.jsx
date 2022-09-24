@@ -13,6 +13,7 @@ const MenuBar = memo(() => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {languagePopupDisplay} = useSelector(state => state.popup)
+    const {likedPosts} = useSelector(state => state.likedPost)
 
     const setPopupDisplayHandler = () => {
         const display = (languagePopupDisplay === 'none') ? 'block' : 'none'
@@ -33,6 +34,9 @@ const MenuBar = memo(() => {
                 <div className={styles.nav__item} onClick={() => navigate('/liked')}>
                     <AiOutlineHeart size={20}/>
                     <span>Избранное</span>
+                    <div className='absolute bottom-3 left-28 h-5 w-auto px-1.5 pt-0.5 text-xs text-white rounded-full bg-red-500'>
+                        {likedPosts.length}
+                    </div>
                 </div>
                 <hr className='my-1.5'/>
                 <div className={styles.nav__item} onClick={() => navigate('/categories')}>

@@ -1,18 +1,15 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
-import {TbLetterB, TbLetterH} from "react-icons/tb";
-import {AiOutlineItalic, AiOutlineLine} from "react-icons/ai";
-import {FaListOl, FaListUl, FaQuoteLeft} from "react-icons/fa";
-import {ImPageBreak} from "react-icons/im";
-import {BsImage} from "react-icons/bs";
-import {BiMove} from "react-icons/bi";
-import {GoEye} from "react-icons/go";
 import Button from "../../components/UI/button/Button";
 import {createPost} from "../../store/actions/postActions";
 import UploadPostImageForm from "../../components/UI/upload-image-form/UploadPostImageForm";
 import {setPostImageToDefault} from "../../store/reducers/postReducer";
 import {DEFAULT_IMAGE_URL} from "../../config/url";
+import {EditorState, convertToRaw} from 'draft-js'
+import {Editor} from 'react-draft-wysiwyg'
+import draftToHtml from 'draftjs-to-html'
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css'
 import './createPostPage.scss'
 
 const CreatePostPage = () => {
@@ -23,6 +20,7 @@ const CreatePostPage = () => {
     const [title, setTitle] = useState('')
     const [description, setDescription] = useState('')
     const [tags, setTags] = useState('')
+    const [editorState, setEditorState] = useState(EditorState.createEmpty())
 
     function createPostHandler() {
         navigate('/')
@@ -39,31 +37,7 @@ const CreatePostPage = () => {
     return (
         <div className='wrapper'>
             <UploadPostImageForm/>
-            <div className='edit__icons'>
-                <TbLetterB size={20} className='mr-3'/>
-                <AiOutlineItalic size={20} className='mr-3'/>
-                <TbLetterH size={20}/>
-                <AiOutlineLine
-                    size={20} className='mx-1.5 text-gray-400'
-                    style={{transform: 'rotate(90deg)'}}
-                />
-                <FaQuoteLeft size={20} className='mr-6 ml-1'/>
-                <FaListUl size={20} className='mr-6'/>
-                <FaListOl size={20}/>
-                <AiOutlineLine
-                    size={20} className='mx-3 text-gray-400'
-                    style={{transform: 'rotate(90deg)'}}
-                />
-                <ImPageBreak size={20} className='mr-5'/>
-                <BsImage size={20}/>
-                <AiOutlineLine
-                    size={20} className='ml-3 mr-2 text-gray-400'
-                    style={{transform: 'rotate(90deg)'}}
-                />
-                <BiMove size={20} className='mr-4'/>
-                <GoEye size={20}/>
-            </div>
-            <div className='bg-white px-10 py-9 rounded-md'>
+            <div className='mt-4 bg-white px-10 py-9 rounded-md'>
                 <input
                     className='post__title'
                     type='text'
@@ -71,11 +45,65 @@ const CreatePostPage = () => {
                     placeholder='Заголовок статьи...'
                     onChange={(e) => setTitle(e.target.value)}
                 />
-                <textarea
-                    className='post__description'
-                    value={description}
-                    placeholder="Введите текст..."
-                    onChange={(e) => setDescription(e.target.value)}
+                <Editor
+                    placeholder='Введите текст...'
+                    editorState={editorState}
+                    onEditorStateChange={newState => {
+                        setEditorState(newState)
+                        setDescription(draftToHtml(convertToRaw(newState.getCurrentContent())))
+                    }}
+                    toolbar={{
+                        options: ['inline', 'blockType', 'fontSize', 'list', 'emoji'],
+                        inline: {
+                            inDropdown: false,
+                            className: undefined,
+                            component: undefined,
+                            dropdownClassName: undefined,
+                            options: ['bold', 'italic', 'underline', 'strikethrough', 'monospace', 'superscript', 'subscript'],
+                        },
+                        blockType: {
+                            inDropdown: true,
+                            options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Blockquote', 'Code'],
+                            className: undefined,
+                            component: undefined,
+                            dropdownClassName: undefined,
+                        },
+                        fontSize: {
+                            options: [8, 9, 10, 11, 12, 14, 16, 18, 24, 30, 36, 48, 60, 72, 96],
+                            className: undefined,
+                            component: undefined,
+                            dropdownClassName: undefined,
+                        },
+                        fontFamily: {
+                            options: ['Arial', 'Georgia', 'Impact', 'Tahoma', 'Times New Roman', 'Verdana'],
+                            className: undefined,
+                            component: undefined,
+                            dropdownClassName: undefined,
+                        },
+                        list: {
+                            inDropdown: false,
+                            className: undefined,
+                            component: undefined,
+                            dropdownClassName: undefined,
+                            options: ['unordered', 'ordered', 'indent', 'outdent'],
+                        },
+                        emoji: {
+                            className: undefined,
+                            component: undefined,
+                            popupClassName: undefined,
+                            emojis: [
+                                '😀', '😁', '😂', '😃', '😉', '😋', '😎', '😍', '😗', '🤗', '🤔', '😣', '😫', '😴', '😌', '🤓',
+                                '😛', '😜', '😠', '😇', '😷', '😈', '👻', '😺', '😸', '😹', '😻', '😼', '😽', '🙀', '🙈',
+                                '🙉', '🙊', '👼', '👮', '🕵', '💂', '👳', '🎅', '👸', '👰', '👲', '🙍', '🙇', '🚶', '🏃', '💃',
+                                '⛷', '🏂', '🏌', '🏄', '🚣', '🏊', '⛹', '🏋', '🚴', '👫', '💪', '👈', '👉', '👉', '👆', '🖕',
+                                '👇', '🖖', '🤘', '🖐', '👌', '👍', '👎', '✊', '👊', '👏', '🙌', '🙏', '🐵', '🐶', '🐇', '🐥',
+                                '🐸', '🐌', '🐛', '🐜', '🐝', '🍉', '🍄', '🍔', '🍤', '🍨', '🍪', '🎂', '🍰', '🍾', '🍷', '🍸',
+                                '🍺', '🌍', '🚑', '⏰', '🌙', '🌝', '🌞', '⭐', '🌟', '🌠', '🌨', '🌩', '⛄', '🔥', '🎄', '🎈',
+                                '🎉', '🎊', '🎁', '🎗', '🏀', '🏈', '🎲', '🔇', '🔈', '📣', '🔔', '🎵', '🎷', '💰', '🖊', '📅',
+                                '✅', '❎', '💯',
+                            ],
+                        }
+                    }}
                 />
                 <input
                     className='post__tags'

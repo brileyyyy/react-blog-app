@@ -1,5 +1,6 @@
 import Post from "../models/Post.js";
 import User from "../models/User.js";
+import Comment from "../models/Comment.js";
 
 class PostController {
     async createPost(req, res) {
@@ -127,11 +128,23 @@ class PostController {
     async deletePost(req, res) {
         try {
             const postId = req.params.postId
+            const userId = res.locals.user._id
+
+            const user = await User.findOne({_id: userId})
+            const postComments = await Post.find({post: postId}, {comments: 1, _id: 0})
 
             await User.updateOne(
                 {posts: postId},
                 {$pull: {posts: postId}}
             )
+
+            for (let el of postComments) {
+                const index = user.comments.indexOf(el)
+                user.comments.splice(index, 1)
+            }
+            await user.save()
+
+            await Comment.deleteMany({post: postId})
 
             Post.findOneAndDelete(
                 {_id: postId},

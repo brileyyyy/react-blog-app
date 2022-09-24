@@ -7,10 +7,11 @@ import styles from './tagsBar.module.scss'
 const TagsBar = memo(() => {
     const dispatch = useDispatch()
     const {popularTags} = useSelector(state => state.tag)
+    const {posts} = useSelector(state => state.post)
 
     useEffect(() => {
         dispatch(getPopularTags())
-    }, [])
+    }, [dispatch, posts])
 
     return (
         <div className={styles.container}>

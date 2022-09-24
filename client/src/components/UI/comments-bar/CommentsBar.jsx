@@ -6,10 +6,11 @@ import CommentsBarItem from "../comments-bar-item/CommentsBarItem";
 const CommentsBar = memo(() => {
     const dispatch = useDispatch()
     const {comments} = useSelector(state => state.comment)
+    const {posts} = useSelector(state => state.post)
 
     useEffect(() => {
         dispatch(getAllComments())
-    }, [dispatch])
+    }, [dispatch, posts])
 
     return (
         <div className='mb-4 p-4 bg-white rounded-md'>

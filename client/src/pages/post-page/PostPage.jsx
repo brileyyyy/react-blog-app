@@ -32,9 +32,12 @@ const PostPage = () => {
                     <div className='mb-6 text-3xl text-gray-700 font-bold'>
                         {currentPost.title}
                     </div>
-                    <div className='mb-4 text-base text-gray-600'>
-                        {currentPost.description}
-                    </div>
+                    <div
+                        className='mb-4 text-base text-gray-600'
+                        dangerouslySetInnerHTML={{
+                            __html: currentPost.description
+                        }}
+                    />
                     <div className='flex items-center text-xl text-gray-400 font-medium'>
                         {currentPost.tags.map(tag =>
                             <div key={tag}>
