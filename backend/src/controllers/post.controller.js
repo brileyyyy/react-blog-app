@@ -71,6 +71,17 @@ class PostController {
         }
     }
 
+    async getPopularPosts(req, res) {
+        try {
+            const popularPosts = await Post.find().sort({'viewsCount': -1})
+
+            return res.json(popularPosts)
+        } catch(e) {
+            console.log(e)
+            return res.status(500).json({message: 'Get popular posts error'})
+        }
+    }
+
     async getOnePost(req, res) {
         try {
             const postId = req.params.postId

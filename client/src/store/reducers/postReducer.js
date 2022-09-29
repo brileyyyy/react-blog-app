@@ -5,7 +5,7 @@ import {
     getAllPosts,
     getAllUserPosts,
     getOnePost,
-    getOnePostByComment, updateOnePost, uploadPostImage
+    getOnePostByComment, getPopularPosts, updateOnePost, uploadPostImage
 } from "../actions/postActions";
 
 const initialState = {
@@ -51,6 +51,13 @@ const postReducer = createSlice({
                 state.userPostsCount = action.payload.postsCount
             })
             .addCase(getAllUserPosts.pending, (state) => {
+                state.isLoading = true
+            })
+            .addCase(getPopularPosts.fulfilled, (state, action) => {
+                state.isLoading = false
+                state.posts = action.payload
+            })
+            .addCase(getPopularPosts.pending, (state) => {
                 state.isLoading = true
             })
             .addCase(getOnePost.fulfilled, (state, action) => {

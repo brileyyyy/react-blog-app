@@ -54,6 +54,20 @@ export const getAllUserPosts = createAsyncThunk(
     }
 )
 
+export const getPopularPosts = createAsyncThunk(
+    'post/popular', async (_, {rejectWithValue}) => {
+        try {
+            return (await axios.get('http://localhost:5000/api/posts-popular', {
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })).data
+        } catch (e) {
+            return rejectWithValue(e.response.data.message)
+        }
+    }
+)
+
 export const getOnePost = createAsyncThunk(
     'post/getOne', async (data, {rejectWithValue}) => {
         try {
