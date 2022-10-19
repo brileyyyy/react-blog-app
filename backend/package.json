@@ -23,6 +23,6 @@
     "pino-pretty": "^8.1.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "nodemon": "^2.0.20"
   }
 }
